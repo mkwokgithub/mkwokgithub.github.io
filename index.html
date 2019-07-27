@@ -18,7 +18,7 @@ data = d3.csv("https://flunky.github.io/cars2017.csv").then(
       d.population = +d.population;
       d["land area"] = +d["land area"];
     });
-    console.log(data[0].AverageCityMPG);
+    //console.log(data[0].AverageCityMPG);
     return data;
   }
 );
@@ -184,6 +184,8 @@ data = [
 {EngineCylinders: 4, AverageHighwayMPG: 29, AverageCityMPG: 22},
 {EngineCylinders: 4, AverageHighwayMPG: 32, AverageCityMPG: 23}
 ];
+
+console.log(data);
 
 d3.select("svg")
 .append("g")
