@@ -7,10 +7,11 @@
 <script>
 
 d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
-
+    data = JSON.parse(data);
     data.forEach(function(d) {
-      d.population = +d.population;
-      d["land area"] = +d["land area"];
+      d.EngineCylinders = +d.EngineCylinders;
+      d.AverageHighwayMPG = +d.AverageHighwayMPG;
+      d.AverageCityMPG = +d.AverageCityMPG;
     });
 
 var margin = {value: 50};
