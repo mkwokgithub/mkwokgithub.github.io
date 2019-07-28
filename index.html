@@ -3,11 +3,11 @@
 <meta charset="utf-8">
 
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
 
 <!-- Add 2 buttons -->
-<button onclick="update(data1)">Dataset 1</button>
-<button onclick="update(data2)">Dataset 2</button>
+<button onclick="update(data1)">1</button>
+<button onclick="update(data2)">2</button>
 
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
@@ -60,14 +60,14 @@ function update(data) {
   // Create the X axis:
   x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
   svg.selectAll(".myXaxis").transition()
-    .duration(3000)
+    .duration(500)
     .call(xAxis);
 
   // create the Y axis
   y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
   svg.selectAll(".myYaxis")
     .transition()
-    .duration(3000)
+    .duration(500)
     .call(yAxis);
 
   // Create a update selection: bind to the new data
@@ -81,7 +81,7 @@ function update(data) {
     .attr("class","lineTest")
     .merge(u)
     .transition()
-    .duration(3000)
+    .duration(500)
     .attr("d", d3.line()
       .x(function(d) { return x(d.ser1); })
       .y(function(d) { return y(d.ser2); }))
