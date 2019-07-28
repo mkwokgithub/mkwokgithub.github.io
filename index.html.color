@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
 
 <!-- Add 2 buttons -->
 <button onclick="changeColor('blue')">Get blue</button>
