@@ -1,91 +1,51 @@
-<!-- Code from d3-graph-gallery.com -->
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v5.js"></script>
-
-<!-- Add 2 buttons -->
-<button onclick="update(data1)">1</button>
-<button onclick="update(data2)">2</button>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<style> circle {fill: lightblue; stroke: black;} </style>
+<body onload='init()'>
+<svg width=300 height=300>
+</svg>
 <script>
 
-// Create 2 datasets
-var data1 = [
-   {ser1: 0.3, ser2: 4},
-   {ser1: 2, ser2: 16},
-   {ser1: 3, ser2: 8}
-];
+d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
 
-var data2 = [
-   {ser1: 1, ser2: 7},
-   {ser1: 4, ser2: 1},
-   {ser1: 6, ser2: 8}
-];
+    data.forEach(function(d) {
+      d.population = +d.population;
+      d["land area"] = +d["land area"];
+    });
 
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 50},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {value: 50};
+var chart_width = {value:200};
+var chart_height = {value:200};
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+var x = d3.scaleLog()
+.domain([10,150])
+.range([0,chart_width.value]);
 
-// Initialise a X axis:
-var x = d3.scaleLinear().range([0,width]);
-var xAxis = d3.axisBottom().scale(x);
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .attr("class","myXaxis")
+var y = d3.scaleLog()
+.domain([10,150])
+.range([chart_height.value,0]);
 
-// Initialize an Y axis
-var y = d3.scaleLinear().range([height, 0]);
-var yAxis = d3.axisLeft().scale(y);
-svg.append("g")
-  .attr("class","myYaxis")
 
-// Create a function that takes a dataset as input and update the plot:
-function update(data) {
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+margin.value+","+margin.value+")")
+.selectAll("circle")
+.data(data)
+.enter().append("circle")
+.attr("cx",function(d,i){return x(d.AverageCityMPG);})
+.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders+2;});
 
-  // Create the X axis:
-  x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
-  svg.selectAll(".myXaxis").transition()
-    .call(xAxis);
+d3.select("svg").append("g")
+.attr("transform","translate("+margin.value+","+margin.value+")")
+.call(d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
-  // create the Y axis
-  y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
-  svg.selectAll(".myYaxis")
-    .call(yAxis);
 
-  // Create a update selection: bind to the new data
-  var u = svg.selectAll(".lineTest")
-    .data([data], function(d){ return d.ser1 });
+d3.select("svg").append("g")
+.attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
+.call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
-  // Updata the line
-  u
-    .enter()
-    .append("path")
-    .attr("class","lineTest")
-    .merge(u)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.ser1); })
-      .y(function(d) { return y(d.ser2); }))
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 2.5)
-}
-
-// At the beginning, I run the update function on the first dataset:
-update(data1)
-
+})
 </script>
+</body>
+</html>
