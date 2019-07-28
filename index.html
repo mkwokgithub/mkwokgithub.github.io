@@ -60,14 +60,11 @@ function update(data) {
   // Create the X axis:
   x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
   svg.selectAll(".myXaxis").transition()
-    .duration(500)
     .call(xAxis);
 
   // create the Y axis
   y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
   svg.selectAll(".myYaxis")
-    .transition()
-    .duration(500)
     .call(yAxis);
 
   // Create a update selection: bind to the new data
@@ -80,8 +77,6 @@ function update(data) {
     .append("path")
     .attr("class","lineTest")
     .merge(u)
-    .transition()
-    .duration(500)
     .attr("d", d3.line()
       .x(function(d) { return x(d.ser1); })
       .y(function(d) { return y(d.ser2); }))
