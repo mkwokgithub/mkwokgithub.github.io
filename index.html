@@ -28,9 +28,12 @@ d3.select("svg")
 .selectAll("circle")
 .data(data)
 .enter().append("circle")
-.attr("cx",function(d,i){return x(d.AverageCityMPG);})
-.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders+2;});
+//.attr("cx",function(d,i){return x(d.AverageCityMPG);})
+//.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
+//.attr("r",function(d,i){return d.EngineCylinders+2;});
+.attr("cx",function(d,i){return 10;})
+.attr("cy",function(d,i){return 10;})
+.attr("r",function(d,i){return 5;});
 
 d3.select("svg").append("g")
 .attr("transform","translate("+margin.value+","+margin.value+")")
