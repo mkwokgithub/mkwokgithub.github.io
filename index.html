@@ -1,23 +1,22 @@
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src='https://d3js.org/d3.v5.js'></script>
 <style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
 <svg width=300 height=300>
 </svg>
 <script>
-async function init() {
 
-data = d3.csv("https://flunky.github.io/cars2017.csv").then(
-  function(data) {
-    return {
-        Make: data.Make,
-        Fuel: data.Fuel,
-        EngineCylinders: +data.EngineCylinders,
-        AverageHighwayMPG: +data.AverageHighwayMPG,
-        AverageCityMPG: +data.AverageCityMPG
-    }; 
-  }
-);
+d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
+    data = function(data) {
+       return {
+           Make: data.Make,
+           Fuel: data.Fuel,
+           EngineCylinders: +data.EngineCylinders,
+           AverageHighwayMPG: +data.AverageHighwayMPG,
+           AverageCityMPG: +data.AverageCityMPG
+       };
+
+    } 
 
 console.log(data);
 
@@ -53,8 +52,5 @@ d3.select("svg").append("g")
 .attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
 .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
-
-}
+})
 </script>
-</body>
-</html>
