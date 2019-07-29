@@ -1,11 +1,31 @@
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src='https://d3js.org/d3.v5.js'></script>
 <style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
 <svg width=300 height=300>
 </svg>
 <script>
-async function init() {
+
+d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
+length = data.length;
+console.log(length);
+//    data = function(data) {
+//       return {
+//        Make: data[0].Make,
+//        Fuel: data[0].Fuel,
+//        EngineCylinders: +data[0].EngineCylinders,
+//        AverageHighwayMPG: +data[0].AverageHighwayMPG,
+//        AverageCityMPG: +data[0].AverageCityMPG
+//       };
+//    }
+
+//    for (var i = 0; i < data.length; i++) {
+//        console.log(data[i].Make);
+//    }
+
+ 
+
+console.log(data);
 
 var margin = {value: 50};
 var chart_width = {value:200};
@@ -20,25 +40,15 @@ var y = d3.scaleLog()
 .range([chart_height.value,0]);
 
 
-d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
- data.forEach(function(d) {
-    d.AverageCityMPG = +d.AverageCityMPG;
-    d.AverageHighwayMPG = +d.AverageHighwayMPG;
-    d.EngineCylinders = +d.EngineCylinders;
- });
-
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+margin.value+","+margin.value+")")
 .selectAll("circle")
 .data(data)
 .enter().append("circle")
-.attr("cx",function(d,i){return x(d.AverageCityMPG);})
-.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders+2;});
-
-});
-
+.attr("cx",function(d,i){return x(+d.AverageCityMPG);})
+.attr("cy",function(d,i){return y(+d.AverageHighwayMPG);})
+.attr("r",function(d,i){return (+d.EngineCylinders)+2;});
 
 d3.select("svg").append("g")
 .attr("transform","translate("+margin.value+","+margin.value+")")
@@ -49,7 +59,5 @@ d3.select("svg").append("g")
 .attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
 .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
-}
+})
 </script>
-</body>
-</html>
