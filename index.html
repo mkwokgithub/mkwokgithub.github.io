@@ -4,18 +4,44 @@
 
 circle {fill: lightblue; stroke: black;} 
 
-button {
-  position: absolute;
-  left: 200px;
-  top: 50px;
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
 }
 
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
 
 </style>
 <body onload='init()'>
+
+<div class="btn-group">
+  <button onclick="update(data1)">Diesel</button>
+  <button onclick="update(data2)">Electicity</button>
+  <button onclick="update(data3)">Gasoline</button>
+</div>
+/*
 <button onclick="update(data1)">Diesel</button>
 <button onclick="update(data2)">Electicity</button>
 <button onclick="update(data3)">Gasoline</button>
+*/
 <svg width=800 height=800>
 </svg>
 <script>
