@@ -1,0 +1,32 @@
+GeoJSON/ TopoJSON  ok
+
+
+
+https://d3-annotation.susielu.com/
+
+https://mediaspace.illinois.edu/tag/sort/name/tag/cs498dv/mediatypeparam//tagid/cs498dv
+
+. You can create such web pages at http://pages.github.io and your assignment will need to have at least three scenes (though they can use the same chart layout).
+
+
+
+an interactive slideshow, where user exploration is allowed at some or all of the steps of the story, or
+
+https://gist.github.com/ZJONSSON/1254855/586aa13642a3e5dffdcbfae1528883ae4c0ff802#file-test-svg
+
+https://www.d3-graph-gallery.com/graph/interactivity_button.html
+
+data1 = d3.csv("https://flunky.github.io/cars2017.csv").then(
+  function(data) {
+    return {
+        Make: data.Make,
+        Fuel: data.Fuel,
+        EngineCylinders: +data.EngineCylinders,
+        AverageHighwayMPG: +data.AverageHighwayMPG,
+        AverageCityMPG: +data.AverageCityMPG
+    };
+  }
+);
+
+https://plot.ly/javascript/custom-buttons/
+
