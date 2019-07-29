@@ -7,11 +7,6 @@
 <script>
 
 d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
-    data.forEach(function(d) {
-      d.EngineCylinders = +d.EngineCylinders;
-      d.AverageHighwayMPG = +d.AverageHighwayMPG;
-      d.AverageCityMPG = +d.AverageCityMPG;
-    });
 
 var margin = {value: 50};
 var chart_width = {value:200};
