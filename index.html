@@ -6,15 +6,16 @@ circle {fill: lightblue; stroke: black;}
 
 button {
   position: absolute;
-  left: 100px;
+  left: 200px;
   top: 50px;
 }
 
 
 </style>
 <body onload='init()'>
-<button onclick="update(data1)">1</button>
-<button onclick="update(data2)">2</button>
+<button onclick="update(data1)">Diesel</button>
+<button onclick="update(data2)">Electicity</button>
+<button onclick="update(data3)">Gasoline</button>
 <svg width=800 height=800>
 </svg>
 <script>
@@ -22,7 +23,7 @@ async function init() {
 
 var data1 = [];
 var data2 = [];
-
+var data3 = [];
 
 
 var margin = {value: 100};
