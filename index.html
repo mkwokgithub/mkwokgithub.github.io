@@ -7,10 +7,14 @@
 <script>
 
 d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
-console.log(data);
+console.log(data[0]);
     data = function(data) {
        return {
-          key: data.key, value: +data.value
+        Make: data[0].Make,
+        Fuel: data[0].Fuel,
+        EngineCylinders: +data[0].EngineCylinders,
+        AverageHighwayMPG: +data[0].AverageHighwayMPG,
+        AverageCityMPG: +data[0].AverageCityMPG
        };
     } 
 
