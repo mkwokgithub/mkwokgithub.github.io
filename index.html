@@ -10,11 +10,7 @@ d3.csv("https://flunky.github.io/cars2017.csv", function(data) {
 console.log(data);
     data = function(data) {
        return {
-           Make: data.Make,
-           Fuel: data.Fuel,
-           EngineCylinders: +data.EngineCylinders,
-           AverageHighwayMPG: +data.AverageHighwayMPG,
-           AverageCityMPG: +data.AverageCityMPG
+          key: d.key, value: +d.value;
        };
 
     } 
