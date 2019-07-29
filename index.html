@@ -73,6 +73,8 @@ mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
 });
   
 
+console.log(mydata);
+
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+margin.value+","+margin.value+")")
