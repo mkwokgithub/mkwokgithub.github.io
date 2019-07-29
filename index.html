@@ -7,7 +7,7 @@
 <script>
 async function init() {
 
-data = d3.csv("https://flunky.github.io/cars2017.csv").then(
+data1 = d3.csv("https://flunky.github.io/cars2017.csv").then(
   function(data) {
     return {
         Make: data.Make,
@@ -18,6 +18,8 @@ data = d3.csv("https://flunky.github.io/cars2017.csv").then(
     }; 
   }
 );
+
+console.log(data1);
 
 var margin = {value: 50};
 var chart_width = {value:200};
