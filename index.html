@@ -5,6 +5,14 @@
 <svg width=800 height=800>
 </svg>
 <script>
+
+<!-- Add 2 buttons -->
+<button onclick="update(data1)">1</button>
+<button onclick="update(data2)">2</button>
+
+var data1 = [];
+var data2 = []
+
 async function init() {
 
 var margin = {value: 100};
@@ -50,6 +58,13 @@ d3.select("svg").append("g")
 .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
 }
+
+function update(data) {
+
+}
+
+update(data1)
+
 </script>
 </body>
 </html>
