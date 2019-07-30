@@ -79,11 +79,11 @@ svg.append("g")
 
 // Initialize an Y axis
 var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
-var yAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
+var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
 
 svg.append("g")
   .attr("transform","translate("+margin.value+","+margin.value+")")
-  .attr("class","myyAxis")
+  .attr("class","myYaxis")
 
 
 
