@@ -78,7 +78,7 @@ var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s
 
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
-  .attr("class","myXaxis");
+  .attr("class","myXaxis")
   .append("text")             
       .attr("transform",
             "translate(" + (chart_width.value/2) + " ," + 
@@ -93,7 +93,7 @@ var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")
 
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
-  .attr("class","myYaxis");
+  .attr("class","myYaxis")
   .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin_left.value)
@@ -115,7 +115,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 10");
+console.log("I am in init 11");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
