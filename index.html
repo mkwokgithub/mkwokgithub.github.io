@@ -115,6 +115,7 @@ svg.append("text")
             "translate(" + (margin_left.value + chart_width.value/2) + " ," +
                            (chart_height.value + margin_top.value + 50) + ")")
       .style("text-anchor", "middle")
+      .style("font-weight", "bold")
       .text("Average City MPG (in base 10 log scale)");
 
 // create the Y axis
@@ -124,7 +125,8 @@ svg.append("text")
     .call(yAxis);
 
 svg.append("text")
-  .attr("text-anchor", "middle") 
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
   .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
   .text("Average Highway MPG (in base 10 log scale)");
 
