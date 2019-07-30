@@ -60,6 +60,10 @@ var chart_height = {value:600};
 var svg_width = {value:900};
 var svg_height = {value:900};
 
+//data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
+//data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
+//data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
+
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
@@ -69,7 +73,7 @@ var svg = d3.select("#my_dataviz")
     .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
 // Initialise a X axis:
-var x = d3.scaleLog().domain([0,150]).range([0,chart_width.value]);
+var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
 var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
 
 svg.append("g")
@@ -78,8 +82,8 @@ svg.append("g")
 
 
 // Initialize an Y axis
-var y = d3.scaleLog().domain([0,150]).range([chart_height.value,0]);
-var yAxis = d3.axisLeft(y).tickValues([0,10,20,50,100]).tickFormat(d3.format("~s")); 
+var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
+var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
 
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
@@ -91,9 +95,6 @@ svg.selectAll(".myXaxis")
     .transition()
     .duration(100)
     .call(xAxis);
-
-
-// Create X axis label:
 
 svg.append("text")
       .attr("transform",
@@ -109,8 +110,6 @@ svg.append("text")
     .transition()
     .duration(100)
     .call(yAxis);
-
-// Create Y axis label:
 
 svg.append("text")
   .attr("text-anchor", "middle")
@@ -132,7 +131,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 26");
+console.log("I am in init 25");
 
 d3.select("svg")
 .append("g")
@@ -165,6 +164,7 @@ d3.select("svg")
 .append("g")
 .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
 .selectAll("circle")
+//.data(mydata.filter(function(d){return  d.Fuel == fuel;}))
 .data(mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;}))
 .enter().append("circle")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
