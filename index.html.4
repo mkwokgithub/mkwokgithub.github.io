@@ -40,8 +40,8 @@ circle {fill: lightblue; stroke: black;}
   <button onclick="update(data_electricity)">Electicity</button>
   <button onclick="update(data_gasoline)">Gasoline</button>
 </div>
-// <svg width=800 height=800>
-// </svg>
+<svg width=800 height=800>
+</svg>
 <script>
 
 var mycardata = [];
@@ -53,6 +53,10 @@ var margin = {value: 100};
 var chart_width = {value:600};
 var chart_height = {value:600};
 
+var x = d3.scaleLog()
+.domain([10,150])
+.range([0,chart_width.value]);
+
 var y = d3.scaleLog()
 .domain([10,150])
 .range([chart_height.value,0]);
@@ -60,30 +64,6 @@ var y = d3.scaleLog()
 //data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
 //data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
 //data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", 800)
-    .attr("height", 800)
-  .append("g")
-    .attr("transform","translate("+margin.value+","+margin.value+")")
-
-// Initialise a X axis:
-var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
-var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
-
-svg.append("g")
-  .attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
-  .attr("class","myXaxis")
-
-// Initialize an Y axis
-var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
-var yAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
-
-svg.append("g")
-  .attr("transform","translate("+margin.value+","+margin.value+")")
-  .attr("class","myyAxis")
 
 
 
@@ -98,21 +78,11 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
+d3.select("svg").html = "";
 
-// Create the X axis:
-svg.selectAll(".myXaxis")
-    .transition()
-    .duration(500)
-    .call(xAxis);
-
-// create the Y axis
-  svg.selectAll(".myYaxis")
-    .transition()
-    .duration(500)
-    .call(yAxis);
-
-var u = svg.selectAll(".lineTest") 
+d3.select("svg")
 .append("g")
+.attr("transform","translate("+margin.value+","+margin.value+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
 .enter().append("circle")
@@ -121,7 +91,16 @@ var u = svg.selectAll(".lineTest")
 .attr("r",function(d,i){return d.EngineCylinders+2;});
 
 
+d3.select("svg").append("g")
+.attr("transform","translate("+margin.value+","+margin.value+")")
+.call(d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
+
+d3.select("svg").append("g")
+.attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
+.call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
+
+d3.select("svg").html = "";
 
 }
 
@@ -140,6 +119,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
+d3.select("svg").html = "";
 
 d3.select("svg")
 .append("g")
