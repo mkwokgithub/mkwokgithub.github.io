@@ -30,3 +30,8 @@ data1 = d3.csv("https://flunky.github.io/cars2017.csv").then(
 
 https://plot.ly/javascript/custom-buttons/
 
+
+git add --all
+git commit -m "commit"
+git push -u origin master
+
