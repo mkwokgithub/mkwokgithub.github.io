@@ -69,12 +69,11 @@ var mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data)
     d.AverageHighwayMPG = +d.AverageHighwayMPG;
     d.EngineCylinders = +d.EngineCylinders;
  });
- console.log(data);
  return data;
 });
   
 
-//console.log(mydata);
+console.log(mydata);
 
 d3.select("svg")
 .append("g")
