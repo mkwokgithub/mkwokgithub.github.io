@@ -62,17 +62,17 @@ var y = d3.scaleLog()
 .domain([10,150])
 .range([chart_height.value,0]);
 
+var mydata;
 
-var mypromise = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
     d.AverageCityMPG = +d.AverageCityMPG;
     d.AverageHighwayMPG = +d.AverageHighwayMPG;
     d.EngineCylinders = +d.EngineCylinders;
  });
- return data;
+ mydata = data;
 });
   
-mydata = mypromise.then(function(result) { return result;});
 console.log(mydata);
 
 d3.select("svg")
