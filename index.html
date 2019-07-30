@@ -70,7 +70,7 @@ var svg = d3.select("#my_dataviz")
 
 // Initialise a X axis:
 var x = d3.scaleLog().domain([0,150]).range([0,chart_width.value]);
-var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
+var xAxis = d3.axisBottom(x).tickValues([0,10,20,50,100]).tickFormat(d3.format("~s"));
 
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
@@ -132,7 +132,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 26");
+console.log("I am in init 27");
 
 d3.select("svg")
 .append("g")
