@@ -70,10 +70,11 @@ mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
     d.EngineCylinders = +d.EngineCylinders;
  });
  return data;
+ console.log(data);
 });
   
 
-console.log(mydata);
+//console.log(mydata);
 
 d3.select("svg")
 .append("g")
