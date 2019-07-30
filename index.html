@@ -79,10 +79,6 @@ data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
 data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
 
 
-console.log(data_diesel);
-console.log(data_electricity);
-console.log(data_gasoline);
-  
 
 d3.select("svg")
 .append("g")
@@ -106,7 +102,9 @@ d3.select("svg").append("g")
 
 }
 
-console.log(mycardata);
+console.log(data_diesel);
+console.log(data_electricity);
+console.log(data_gasoline);
 
 function update(data) {
 
