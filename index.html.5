@@ -90,33 +90,6 @@ svg.append("g")
   .attr("class","myYaxis");
 
 
-// Create the X axis:
-svg.selectAll(".myXaxis")
-    .transition()
-    .duration(100)
-    .call(xAxis);
-
-svg.append("text")
-      .attr("transform",
-            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-                           (chart_height.value + margin_top.value + 50) + ")")
-      .style("text-anchor", "middle")
-      .style("font-weight", "bold")
-      .text("Average City MPG (in base 10 log scale)");
-
-
-// create the Y axis
-  svg.selectAll(".myYaxis")
-    .transition()
-    .duration(100)
-    .call(yAxis);
-
-svg.append("text")
-  .attr("text-anchor", "middle")
-  .style("font-weight", "bold")
-  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
-  .text("Average Highway MPG (in base 10 log scale)");
-
 
 async function init() {
 
@@ -134,30 +107,30 @@ d3.selectAll("circle").remove();
 console.log("I am in init 20");
 
 // Create the X axis:
-//svg.selectAll(".myXaxis")
-//    .transition()
-//    .duration(100)
-//    .call(xAxis);
+svg.selectAll(".myXaxis")
+    .transition()
+    .duration(100)
+    .call(xAxis);
 
-//svg.append("text")
-//      .attr("transform",
-//            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-//                           (chart_height.value + margin_top.value + 50) + ")")
-//      .style("text-anchor", "middle")
-//      .style("font-weight", "bold")
-//      .text("Average City MPG (in base 10 log scale)");
+svg.append("text")
+      .attr("transform",
+            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
+                           (chart_height.value + margin_top.value + 50) + ")")
+      .style("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Average City MPG (in base 10 log scale)");
 
 // create the Y axis
-//  svg.selectAll(".myYaxis")
-//    .transition()
-//    .duration(100)
-//    .call(yAxis);
+  svg.selectAll(".myYaxis")
+    .transition()
+    .duration(100)
+    .call(yAxis);
 
-//svg.append("text")
-//  .attr("text-anchor", "middle")
-//  .style("font-weight", "bold")
-//  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
-//  .text("Average Highway MPG (in base 10 log scale)");
+svg.append("text")
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
+  .text("Average Highway MPG (in base 10 log scale)");
 
 
 d3.select("svg")
