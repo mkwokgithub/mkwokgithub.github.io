@@ -36,18 +36,18 @@ circle {fill: lightblue; stroke: black;}
 <body onload='init()'>
 
 <div class="btn-group">
-  <button onclick="update("Diesel")">Diesel</button>
-  <button onclick="update("Electricity")">Electicity</button>
-  <button onclick="update("Gasoline")">Gasoline</button>
+  <button onclick="update(data_diesel)">Diesel</button>
+  <button onclick="update(data_electricity)">Electicity</button>
+  <button onclick="update(data_gasoline)">Gasoline</button>
 </div>
 <svg width=800 height=800>
 </svg>
 <script>
 
 var mycardata = [];
-var data_diesel = [];
-var data_electricity = [];
-var data_gasoline = [];
+var data_diesel = "Diesel";
+var data_electricity = "Electricity";
+var data_gasoline = "Gasoline";
 
 var margin = {value: 100};
 var chart_width = {value:600};
@@ -106,7 +106,6 @@ console.log(data_gasoline);
 
 function update(fuel) {
 console.log(fuel);
-
 }
 
 //update(data1)
