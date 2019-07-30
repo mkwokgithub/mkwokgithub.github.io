@@ -102,7 +102,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 16");
+console.log("I am in init 17");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
@@ -130,15 +130,27 @@ svg.append("text")
   .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
   .text("Average Highway MPG (in base 10 log scale)");
 
-//var u = svg.selectAll(".lineTest") 
-svg.selectAll(".lineTest") 
+
+d3.select("svg")
 .append("g")
+.attr("transform","translate("+margin.value+","+margin.value+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
 .enter().append("circle")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders+2;});
+
+
+//var u = svg.selectAll(".lineTest") 
+//svg.selectAll(".lineTest") 
+//.append("g")
+//.selectAll("circle")
+//.data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
+//.enter().append("circle")
+//.attr("cx",function(d,i){return x(d.AverageCityMPG);})
+//.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
+//.attr("r",function(d,i){return d.EngineCylinders+2;});
 
 
 }
