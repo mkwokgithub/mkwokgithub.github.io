@@ -79,6 +79,13 @@ var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
   .attr("class","myXaxis");
+  .append("text")             
+      .attr("transform",
+            "translate(" + (chart_width.value/2) + " ," + 
+                           (chart_height.value + margin_top.value + 20) + ")")
+      .style("text-anchor", "middle")
+      .text("Average City MPG");
+
 
 // Initialize an Y axis
 var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
@@ -87,6 +94,13 @@ var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")
 svg.append("g")
   .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
   .attr("class","myYaxis");
+  .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin_left.value)
+      .attr("x",0 - (chart_height.value / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Average Highway MPG");
 
 
 
@@ -101,7 +115,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 9");
+console.log("I am in init 10");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
