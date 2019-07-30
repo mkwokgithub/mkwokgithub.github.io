@@ -53,11 +53,11 @@ var data_diesel = "Diesel";
 var data_electricity = "Electricity";
 var data_gasoline = "Gasoline";
 
-var margin = {value: 50};
-var chart_width = {value:300};
-var chart_height = {value:300};
-var svg_width = {value:400};
-var svg_height = {value:400};
+var margin = {value: 100};
+var chart_width = {value:600};
+var chart_height = {value:600};
+var svg_width = {value:900};
+var svg_height = {value:900};
 
 //data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
 //data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
@@ -100,7 +100,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 3");
+console.log("I am in init 4");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
