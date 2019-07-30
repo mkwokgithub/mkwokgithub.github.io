@@ -131,34 +131,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 21");
-
-// Create the X axis:
-//svg.selectAll(".myXaxis")
-//    .transition()
-//    .duration(100)
-//    .call(xAxis);
-
-//svg.append("text")
-//      .attr("transform",
-//            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-//                           (chart_height.value + margin_top.value + 50) + ")")
-//      .style("text-anchor", "middle")
-//      .style("font-weight", "bold")
-//      .text("Average City MPG (in base 10 log scale)");
-
-// create the Y axis
-//  svg.selectAll(".myYaxis")
-//    .transition()
-//    .duration(100)
-//    .call(yAxis);
-
-//svg.append("text")
-//  .attr("text-anchor", "middle")
-//  .style("font-weight", "bold")
-//  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
-//  .text("Average Highway MPG (in base 10 log scale)");
-
+console.log("I am in init 22");
 
 d3.select("svg")
 .append("g")
@@ -185,6 +158,30 @@ d3.select("svg")
 }
 
 async function update(fuel) {
+
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+ data.forEach(function(d) {
+    d.AverageCityMPG = +d.AverageCityMPG;
+    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+    d.EngineCylinders = +d.EngineCylinders;
+ });
+ return data;
+});
+
+d3.selectAll("circle").remove();
+
+console.log("I am in update " + fuel);
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+margin_left.value+","+margin_top.value+")")
+.selectAll("circle")
+.data(mydata.filter(function(d){return  d.Fuel == fuel;}))
+.enter().append("circle")
+.attr("cx",function(d,i){return x(d.AverageCityMPG);})
+.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders+2;});
+
 }
 
 console.log(data_diesel);
