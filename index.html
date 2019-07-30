@@ -53,8 +53,8 @@ var data_diesel = "Diesel";
 var data_electricity = "Electricity";
 var data_gasoline = "Gasoline";
 
-var margin_top = {value: 100};
-var margin_left = {value: 70};
+var margin_top = {value: 70};
+var margin_left = {value: 100};
 var chart_width = {value:600};
 var chart_height = {value:600};
 var svg_width = {value:900};
@@ -70,14 +70,14 @@ var svg = d3.select("#my_dataviz")
     .attr("width", svg_width.value)
     .attr("height", svg_height.value)
   .append("g")
-    .attr("transform","translate("+margin_top.value+","+margin_left.value+")");
+    .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
 // Initialise a X axis:
 var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
 var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
 
 svg.append("g")
-  .attr("transform","translate("+margin_top.value+","+(margin_left.value+chart_height.value)+")")
+  .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
   .attr("class","myXaxis");
 
 // Initialize an Y axis
@@ -85,7 +85,7 @@ var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
 var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
 
 svg.append("g")
-  .attr("transform","translate("+margin_top.value+","+margin_left.value+")")
+  .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
   .attr("class","myYaxis");
 
 
@@ -101,7 +101,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 8");
+console.log("I am in init 9");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
