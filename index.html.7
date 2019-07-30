@@ -43,8 +43,8 @@ circle {fill: lightblue; stroke: black;}
 </div>
 
 <!-- Create a div where the graph will take place -->
-//<div id="my_dataviz"></div>
-<svg width=900 height=900>
+<div id="my_dataviz"></div>
+
 <script>
 
 var mycardata = [];
@@ -57,14 +57,14 @@ var margin_top = {value: 70};
 var margin_left = {value: 100};
 var chart_width = {value:600};
 var chart_height = {value:600};
-//var svg_width = {value:900};
-//var svg_height = {value:900};
+var svg_width = {value:900};
+var svg_height = {value:900};
 
 // append the svg object to the body of the page
-var mysvg = d3.select("svg")
-//  .append("svg")
-//    .attr("width", svg_width.value)
-//    .attr("height", svg_height.value)
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", svg_width.value)
+    .attr("height", svg_height.value)
   .append("g")
     .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
@@ -72,7 +72,7 @@ var mysvg = d3.select("svg")
 var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
 var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
 
-mysvg.append("g")
+svg.append("g")
   .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
   .attr("class","myXaxis");
 
@@ -81,13 +81,13 @@ mysvg.append("g")
 var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
 var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
 
-mysvg.append("g")
+svg.append("g")
   .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
   .attr("class","myYaxis");
 
 
 // Create the X axis:
-mysvg.selectAll(".myXaxis")
+svg.selectAll(".myXaxis")
     .transition()
     .duration(100)
     .call(xAxis);
@@ -95,7 +95,7 @@ mysvg.selectAll(".myXaxis")
 
 // Create X axis label:
 
-mysvg.append("text")
+svg.append("text")
       .attr("transform",
             "translate(" + (margin_left.value + chart_width.value/2) + " ," +
                            (chart_height.value + margin_top.value + 50) + ")")
@@ -105,14 +105,14 @@ mysvg.append("text")
 
 
 // create the Y axis
-  mysvg.selectAll(".myYaxis")
+  svg.selectAll(".myYaxis")
     .transition()
     .duration(100)
     .call(yAxis);
 
 // Create Y axis label:
 
-mysvg.append("text")
+svg.append("text")
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
   .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
@@ -136,7 +136,7 @@ console.log("I am in init 35");
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+margin_left.value+","+margin_top.value+")")
+//.attr("transform","translate("+(margin_left.value+50)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
 .enter().append("circle")
@@ -165,7 +165,7 @@ console.log("margin top " + margin_top.value);
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+margin_left.value+","+margin_top.value+")")
+//.attr("transform","translate("+(margin_left.value+50)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;}))
 .enter().append("circle")
