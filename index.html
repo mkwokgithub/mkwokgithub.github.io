@@ -102,7 +102,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-console.log("I am in init 14");
+console.log("I am in init 15");
 
 // Create the X axis:
 svg.selectAll(".myXaxis")
@@ -125,15 +125,8 @@ svg.append("text")
 
 svg.append("text")
   .attr("text-anchor", "middle") 
-  .attr("transform", "translate("+ (margin_left.value) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
+  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")  
   .text("Average Highway MPG (in base 10 log scale)");
-//svg.append("text")
-//      .attr("transform", "rotate(-90)")
-//      .attr("y", 0 - (margin_top+ chart_height.value / 2))
-//      .attr("x",0 - (margin_left.value + 30))
-//      .attr("dy", "1em")
-//      .style("text-anchor", "middle")
-//      .text("Average Highway MPG (in base 10 log scale)");
 
 var u = svg.selectAll(".lineTest") 
 .append("g")
