@@ -77,7 +77,7 @@ var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s
 
 svg.append("g")
   .attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
-  .attr("class","myXaxis")
+  .attr("class","myXaxis");
 
 // Initialize an Y axis
 var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
