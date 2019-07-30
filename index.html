@@ -63,7 +63,7 @@ var y = d3.scaleLog()
 .range([chart_height.value,0]);
 
 
-var mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+var mypromise = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
     d.AverageCityMPG = +d.AverageCityMPG;
     d.AverageHighwayMPG = +d.AverageHighwayMPG;
@@ -72,7 +72,7 @@ var mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data)
  return data;
 });
   
-
+mydata = mypromise.then(function(result) { return result;)};
 console.log(mydata);
 
 d3.select("svg")
