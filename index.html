@@ -136,7 +136,7 @@ console.log("I am in init 32");
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+margin_left.value+","+margin_top.value+")")
+.attr("transform","translate("+(margin_left.value+50)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
 .enter().append("circle")
@@ -165,7 +165,7 @@ console.log("margin top " + margin_top.value);
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+margin_left.value+","+margin_top.value+")")
+.attr("transform","translate("+(margin_left.value+50)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;}))
 .enter().append("circle")
