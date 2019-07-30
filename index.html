@@ -55,7 +55,9 @@ var data_gasoline = "Gasoline";
 
 var margin = {value: 100};
 var chart_width = {value:600};
-var chart_height = {value:600};
+var chart_width = {value:600};
+var svg_width = {value:800};
+var svg_height = {value:800};
 
 //data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
 //data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
@@ -64,10 +66,10 @@ var chart_height = {value:600};
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
-    .attr("width", 800)
-    .attr("height", 800)
+    .attr("width", svg_width.value)
+    .attr("height", svg_height.value)
   .append("g")
-    .attr("transform","translate("+margin.value+","+margin.value+")")
+    .attr("transform","translate("+margin.value+","+margin.value+")");
 
 // Initialise a X axis:
 var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
@@ -83,7 +85,7 @@ var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")
 
 svg.append("g")
   .attr("transform","translate("+margin.value+","+margin.value+")")
-  .attr("class","myYaxis")
+  .attr("class","myYaxis");
 
 
 
@@ -103,13 +105,13 @@ console.log("I am in init");
 // Create the X axis:
 svg.selectAll(".myXaxis")
     .transition()
-    .duration(500)
+    .duration(100)
     .call(xAxis);
 
 // create the Y axis
   svg.selectAll(".myYaxis")
     .transition()
-    .duration(500)
+    .duration(100)
     .call(yAxis);
 
 var u = svg.selectAll(".lineTest") 
