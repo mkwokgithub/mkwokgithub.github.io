@@ -39,19 +39,19 @@ circle {fill: lightblue; stroke: black;}
   <button onclick="update(data_diesel)">Diesel</button>
   <button onclick="update(data_electricity)">Electicity</button>
   <button onclick="update(data_gasoline)">Gasoline</button>
+  <button onclick="update(data_allfueltype)">All Fuel Types</button>
 </div>
 
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
-// <svg width=800 height=800>
-// </svg>
 <script>
 
 var mycardata = [];
-var data_diesel = "Diesel";
-var data_electricity = "Electricity";
-var data_gasoline = "Gasoline";
+var data_diesel = ["Diesel"];
+var data_electricity = ["Electricity"];
+var data_gasoline = ["Gasoline"];
+var data_allfueltype = ["Diesel", "Electricity","Gasoline"];
 
 var margin_top = {value: 70};
 var margin_left = {value: 100};
@@ -143,18 +143,6 @@ d3.select("svg")
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders+2;});
 
-
-//var u = svg.selectAll(".lineTest") 
-//svg.selectAll(".lineTest") 
-//.append("g")
-//.selectAll("circle")
-//.data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
-//.enter().append("circle")
-//.attr("cx",function(d,i){return x(d.AverageCityMPG);})
-//.attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
-//.attr("r",function(d,i){return d.EngineCylinders+2;});
-
-
 }
 
 async function update(fuel) {
@@ -167,6 +155,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  });
  return data;
 });
+selectedNodesArray.indexOf(d.coreId) === -1
 
 d3.selectAll("circle").remove();
 
@@ -176,7 +165,8 @@ d3.select("svg")
 .append("g")
 .attr("transform","translate("+margin_left.value+","+margin_top.value+")")
 .selectAll("circle")
-.data(mydata.filter(function(d){return  d.Fuel == fuel;}))
+//.data(mydata.filter(function(d){return  d.Fuel == fuel;}))
+.data(mydata.filter(function(d){return  fuel.indexof(d.fuel) != -1;}))
 .enter().append("circle")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
@@ -187,9 +177,6 @@ d3.select("svg")
 console.log(data_diesel);
 console.log(data_electricity);
 console.log(data_gasoline);
-
-
-//update(data1)
 
 </script>
 </body>
