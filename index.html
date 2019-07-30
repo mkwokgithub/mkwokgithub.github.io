@@ -78,7 +78,6 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 mycardata = mydata;
   
-console.log(mydata);
 
 d3.select("svg")
 .append("g")
@@ -103,6 +102,8 @@ d3.select("svg").append("g")
 .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
 }
+
+console.log(mycardata);
 
 function update(data) {
 
