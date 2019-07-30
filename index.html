@@ -44,21 +44,10 @@ circle {fill: lightblue; stroke: black;}
 </svg>
 <script>
 
-var mydata;
+var mycardata;
+
 
 async function init() {
-
-await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
- data.forEach(function(d) {
-    d.AverageCityMPG = +d.AverageCityMPG;
-    d.AverageHighwayMPG = +d.AverageHighwayMPG;
-    d.EngineCylinders = +d.EngineCylinders;
- });
- mydata = data;
-});
-
-}
-
 
 var data1 = [];
 var data2 = [];
@@ -78,6 +67,17 @@ var y = d3.scaleLog()
 .range([chart_height.value,0]);
 
 
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+ data.forEach(function(d) {
+    d.AverageCityMPG = +d.AverageCityMPG;
+    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+    d.EngineCylinders = +d.EngineCylinders;
+ });
+ return data;
+});
+
+mycardata = mydata;
+  
 console.log(mydata);
 
 d3.select("svg")
@@ -90,6 +90,7 @@ d3.select("svg")
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders+2;});
 
+// });
 
 
 d3.select("svg").append("g")
@@ -101,6 +102,7 @@ d3.select("svg").append("g")
 .attr("transform","translate("+margin.value+","+(margin.value+chart_height.value)+")")
 .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
 
+}
 
 function update(data) {
 
