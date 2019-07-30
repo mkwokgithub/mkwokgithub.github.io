@@ -36,9 +36,9 @@ circle {fill: lightblue; stroke: black;}
 <body onload='init()'>
 
 <div class="btn-group">
-  <button onclick="update(data1)">Diesel</button>
-  <button onclick="update(data2)">Electicity</button>
-  <button onclick="update(data3)">Gasoline</button>
+  <button onclick="update("Diesel")">Diesel</button>
+  <button onclick="update("Electricity")">Electicity</button>
+  <button onclick="update("Gasoline")">Gasoline</button>
 </div>
 <svg width=800 height=800>
 </svg>
@@ -61,9 +61,9 @@ var y = d3.scaleLog()
 .domain([10,150])
 .range([chart_height.value,0]);
 
-data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
-data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
-data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
+//data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
+//data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
+//data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
 
 
 
@@ -104,7 +104,8 @@ console.log(data_diesel);
 console.log(data_electricity);
 console.log(data_gasoline);
 
-function update(data) {
+function update(fuel) {
+console.log(fuel);
 
 }
 
