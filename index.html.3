@@ -49,6 +49,9 @@ var data_diesel = [];
 var data_electricity = [];
 var data_gasoline = [];
 
+
+async function init() {
+
 var margin = {value: 100};
 var chart_width = {value:600};
 var chart_height = {value:600};
@@ -61,13 +64,6 @@ var y = d3.scaleLog()
 .domain([10,150])
 .range([chart_height.value,0]);
 
-data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
-data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
-data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
-
-
-
-async function init() {
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
@@ -77,6 +73,12 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  });
  return data;
 });
+
+data_diesel = mydata.filter(function(d){return  d.Fuel == "Diesel";});
+data_electricity = mydata.filter(function(d){return  d.Fuel == "Electricity";});
+data_gasoline = mydata.filter(function(d){return  d.Fuel == "Gasoline";});
+
+
 
 d3.select("svg")
 .append("g")
