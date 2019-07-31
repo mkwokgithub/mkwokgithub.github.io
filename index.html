@@ -73,8 +73,13 @@ var x = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
 var xAxis = d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
 
 svg.append("g")
-  .attr("class","myXaxis");
-  .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")")
+  .attr("class","myXaxis")
+  .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")");
+
+
+
+
+
 
 
 // Initialize an Y axis
