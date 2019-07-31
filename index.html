@@ -181,7 +181,9 @@ var tipMouseout = function(d) {
 fuelColor = [mygreen,myblue,myred];
 
 legend = svg.append("g")
-  .attr("transform", "translate(" + (dimensions.innerWidth + 100) + "," + (dimensions.innerHeight - 125) + ")");
+      .attr("transform",
+            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
+                           (chart_height.value + margin_top.value + 50) + ")");
 
 data_allfueltype.forEach((value, index) => {
   legendRow = legend.append("g")
