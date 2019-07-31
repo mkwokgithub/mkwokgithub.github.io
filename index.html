@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 117");
+console.log("I am in init 119");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -177,7 +177,7 @@ var tipMouseout = function(d) {
 };
 
 
-
+// legend
 fuelColor = [mygreen,myblue,myred];
 
 legend = svg.append("g")
@@ -301,10 +301,11 @@ myGroup = ["Select a Make"].concat(myGroup);
 
 // add the options to the button
 d3.select("#selectButton")
-   .style("left", "350px")
-   .style("top", "50px")
+//   .style("left", "350px")
+//   .style("top", "50px")
 //  .attr("transform","translate("+ 350 +","+ 50 +")")
   .selectAll("myOptions")
+  .attr("transform","translate("+ 350 +","+ 50 +")")
 	.data(myGroup)
   .enter()
 	.append("option")
