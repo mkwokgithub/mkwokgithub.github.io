@@ -128,9 +128,9 @@ svg.append("text")
 
 
 // Define our colors
-var green = "#00ff00";
-var lightblue = "#00ffff";
-var red = "#ff0000";
+var mygreen = "#00ff00";
+var myblue = "#00ffff";
+var myred = "#ff0000";
 
 
 
@@ -144,12 +144,12 @@ var tooltip = d3.select("#my_dataviz").append("div")
 var tipMouseover = function(d) {
   var color = "";
   
-  if (d.Fuel == "Electricity") { color = green};
-  if (d.Fuel == "Diesel") { color = lightblue};
-  if (d.Fuel == "Gasoline") { color = red};
+  if (d.Fuel == "Electricity") { color = mygreen};
+  if (d.Fuel == "Diesel") { color = myblue};
+  if (d.Fuel == "Gasoline") { color = myred};
   
   var html  = "Make: <b>" + d.Make + "</b><br/>" +
-			  "Fuel: <span style='color:"+color+";'><b>" + d.Fuel + "</b></span><br/>" +  
+			  "Fuel: <span style='color:" + color + ";'><b>" + d.Fuel + "</b></span><br/>" +  
 			  "EngineCylinders: <b>" + d.EngineCylinders + "</b><br/>" +
 			  "AverageHighwayMPG: <b>" + d.AverageHighwayMPG + "</b><br/>" +
 			  "AverageCityMPG: <b>" + d.AverageCityMPG + "</b>";				  
@@ -184,7 +184,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 67");
+console.log("I am in init 68");
 
 d3.select("svg")
 .append("g")
@@ -197,9 +197,9 @@ d3.select("svg")
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
 .style("fill", function(d) {            // <== Add these
-          if (d.Fuel == "Electricity") {return green;}  // <== Add these
-          else if (d.Fuel == "Diesel"){ return lightblue; }
-          else {return red;}		  // <== Add these
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
 ;}) 
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
@@ -233,10 +233,10 @@ d3.select("svg")
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
 .style("fill", function(d) {            // <== Add these
-          if (d.Fuel == "Electicity") {return green;}  // <== Add these
-          else if (d.Fuel == "Diesel"){ return yellow; }
-          else {return blue;}		  // <== Add these
-;})     
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
+;})      
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
 }
