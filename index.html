@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 112");
+console.log("I am in init 115");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -240,11 +240,11 @@ var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 myGroup = ["Select a Make"].concat(myGroup);
 // add the options to the button
 d3.select("#selectButton")
+  .attr("transform","translate("+ 350 +","+ 50 +")")
   .selectAll('myOptions')
 	.data(myGroup)
   .enter()
 	.append('option')
-	.attr("transform","translate("+ 350 +","+ 50 +")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
@@ -299,11 +299,11 @@ myGroup = ["Select a Make"].concat(myGroup);
 
 // add the options to the button
 d3.select("#selectButton")
+  .attr("transform","translate("+ 350 +","+ 50 +")")
   .selectAll("myOptions")
 	.data(myGroup)
   .enter()
 	.append("option")
-	.attr("transform","translate("+ 350 +","+ 50 +")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
   
