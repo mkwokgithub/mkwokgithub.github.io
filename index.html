@@ -45,8 +45,8 @@ circle {fill: lightblue; stroke: black;}
 <body onload='init()'>
 
 <div class="btn-group">
-  <button onclick="update(data_diesel)">Diesel</button>
   <button onclick="update(data_electricity)">Electicity</button>
+  <button onclick="update(data_diesel)">Diesel</button>
   <button onclick="update(data_gasoline)">Gasoline</button>
   <button onclick="update(data_allfueltype)">All Fuel Types</button>
 </div>
@@ -141,7 +141,7 @@ var tipMouseover = function(d) {
 //                  var html  = d.Make + "<br/>" +
 //                              "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
 //                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
-	  var html  = "Make: <span style='color:" + 5 + ";'><b>" + d.Make + "</b></span><br/>" +  
+	  var html  = "Make: <span style='color:" + #00ff00 + ";'><b>" + d.Make + "</b></span><br/>" +  
 				  "Fuel: <b>" + d.Fuel + "</b><br/>" +
 				  "EngineCylinders: <b>" + d.EngineCylinders + "</b><br/>" +
 				  "AverageHighwayMPG: <b>" + d.AverageHighwayMPG + "</b><br/>" +
@@ -176,7 +176,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 61");
+console.log("I am in init 62");
 
 d3.select("svg")
 .append("g")
