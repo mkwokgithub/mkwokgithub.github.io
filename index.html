@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 136");
+console.log("I am in init 137");
 
 var currentselect = "";
 
@@ -218,6 +218,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("my_title").remove();
+d3.select("my_title").selectAll("text").remove();
 
 myfilterdata = mydata;
 
@@ -225,7 +226,7 @@ myfilterdata = mydata;
 svg.selectAll("my_title")
       svg.append("text")
       .attr("transform",
-            "translate(" + (margin_left.value + 100) + " ," +
+            "translate(" + (margin_left.value + 200) + " ," +
                            margin_top.value + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
@@ -290,13 +291,13 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("option").remove();
-d3.selectAll("my_title").remove();
+d3.select("my_title").selectAll("text").remove();
 
 // Create title:
 svg.selectAll("my_title")
       svg.append("text")
       .attr("transform",
-            "translate(" + (margin_left.value + 100) + " ," +
+            "translate(" + (margin_left.value + 200) + " ," +
                            margin_top.value + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
