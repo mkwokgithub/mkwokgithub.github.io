@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 155");
+console.log("I am in init 157");
 
 var currentselect = "";
 
@@ -112,13 +112,13 @@ svg.selectAll(".myXaxis")
     .call(xAxis);
 
 // Create X axis label:
-//svg.append("text")
-//      .attr("transform",
-//            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-//                           (chart_height.value + margin_top.value + 50) + ")")
-//      .style("text-anchor", "middle")
-//      .style("font-weight", "bold")
-//      .text("Average City MPG (in base 10 log scale)");
+svg.append("text")
+      .attr("transform",
+            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
+                           (chart_height.value + margin_top.value + 50) + ")")
+      .style("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Average City MPG (in base 10 log scale)");
 
 
 // Initialize an Y axis
@@ -136,11 +136,11 @@ svg.selectAll(".myYaxis")
     .call(yAxis);
 
 // Create Y axis label:
-//svg.append("text")
-//  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
-//  .attr("text-anchor", "middle")
-//  .style("font-weight", "bold")
-//  .text("Average Highway MPG (in base 10 log scale)");
+svg.append("text")
+  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .text("Average Highway MPG (in base 10 log scale)");
 
 
 // Add the tooltip container to the my_dataviz container
@@ -218,15 +218,12 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("my_title").remove();
-d3.selectAll("text").remove();
-svg.selectAll(".myXaxis").removed();
-svg.selectAll(".myYaxis").removed();
 
 myfilterdata = mydata;
 
 // Create title:
-//svg.selectAll("my_title")
-svg.append("text")
+svg.selectAll("my_title")
+      .append("text")
       .attr("transform",
             "translate(" + (margin_left.value + 300) + " ," +
                            margin_top.value + ")")
@@ -234,34 +231,6 @@ svg.append("text")
       .style("font-weight", "bold")
       .text("Fuel Efficiency for All Fuel Types");
 	  
-// Create X axis label:
-svg.append("text")
-      .attr("transform",
-            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-                           (chart_height.value + margin_top.value + 50) + ")")
-      .style("text-anchor", "middle")
-      .style("font-weight", "bold")
-      .text("Average City MPG (in base 10 log scale)");
-
-	  
-// Create Y axis label:
-svg.append("text")
-  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
-  .attr("text-anchor", "middle")
-  .style("font-weight", "bold")
-  .text("Average Highway MPG (in base 10 log scale)");	  
-
-svg.selectAll(".myXaxis")
-    .transition()
-    .duration(100)
-    .call(xAxis);
-	
-// create the Y axis
-svg.selectAll(".myYaxis")
-    .transition()
-    .duration(100)
-    .call(yAxis);	
-
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
@@ -319,36 +288,18 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("option").remove();
-//d3.select("#my_title").selectAll("text").remove();
-d3.selectAll("text").remove();
+d3.select("#my_title").remove();
+
 
 // Create title:
-//svg.selectAll("my_title")
-svg.append("text")
+svg.selectAll("my_title")
+      .append("text")
       .attr("transform",
             "translate(" + (margin_left.value + 300) + " ," +
                            margin_top.value + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
       .text("Fuel Efficiency for " + fuel);
-
-// Create X axis label:
-svg.append("text")
-      .attr("transform",
-            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-                           (chart_height.value + margin_top.value + 50) + ")")
-      .style("text-anchor", "middle")
-      .style("font-weight", "bold")
-      .text("Average City MPG (in base 10 log scale)");
-
-	  
-// Create Y axis label:
-svg.append("text")
-  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
-  .attr("text-anchor", "middle")
-  .style("font-weight", "bold")
-  .text("Average Highway MPG (in base 10 log scale)");	 
-
 
 myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
 
