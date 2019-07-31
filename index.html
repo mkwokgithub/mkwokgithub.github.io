@@ -32,6 +32,15 @@ circle {fill: lightblue; stroke: black;}
   background-color: #3e8e41;
 }
 
+.tooltip {
+    position: absolute;
+    font-size: 12px;
+    width:  auto;
+    height: auto;
+    pointer-events: none;
+    background-color: white;
+}
+
 </style>
 <body onload='init()'>
 
@@ -117,6 +126,37 @@ svg.append("text")
   .text("Average Highway MPG (in base 10 log scale)");
 
 
+// Define our scales
+var colorScale = d3.scale.category10();
+
+// Add the tooltip container to the vis container
+// it's invisible and its position/contents are defined during mouseover
+var tooltip = d3.select("#my_dataviz").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+// tooltip mouseover event handler
+var tipMouseover = function(d) {
+  var color = colorScale(d.Make);
+  var html  = "<br/>" +
+			  "<span style='color:" + color + ";'>" + d.Make + "</span><br/>" +
+			  "<b>" + d.EngineCylinders + "</b> EngineCylinders, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
+
+  tooltip.html(html)
+	  .style("left", (d3.event.pageX + 15) + "px")
+	  .style("top", (d3.event.pageY - 28) + "px")
+	.transition()
+	  .duration(200) // ms
+	  .style("opacity", .9) // started as 0!
+
+};
+// tooltip mouseout event handler
+var tipMouseout = function(d) {
+  tooltip.transition()
+	  .duration(300) // ms
+	  .style("opacity", 0); // don't care about position!
+};
+
 async function init() {
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
@@ -141,7 +181,9 @@ d3.select("svg")
 .attr("opacity",1)
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;});
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
 
 }
 
@@ -170,8 +212,9 @@ d3.select("svg")
 .enter().append("circle")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;});
-
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
 }
 
 console.log(data_diesel);
