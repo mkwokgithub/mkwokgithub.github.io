@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 89");
+console.log("I am in init 91");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -270,7 +270,7 @@ d3.select("svg")
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 
-myGroup = ["Select a Make"].append(myGroup);
+myGroup = ["Select a Make"].concat(myGroup);
 console.log(myGroup);
 // add the options to the button
 d3.select("#selectButton")
