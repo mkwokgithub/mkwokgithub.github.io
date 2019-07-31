@@ -141,11 +141,12 @@ var tipMouseover = function(d) {
 //                  var html  = d.Make + "<br/>" +
 //                              "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
 //                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
-	  var html  = d.Make + "<br/>" +
-				  "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
-				  "<b>" + d.EngineCylinders + "</b>EngineCylinders<br/>" +
-				  "<b>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG<br/>" + 
-				  "<b>" + d.AverageCityMPG + "</b> AverageCityMPG";
+	  var html  = "Make: <span style='color:" + 5 + "<b>" + d.Make + "</b></span><br/>" +  
+				  "Fuel: <b>" + d.Fuel + "</b><br/>" +
+				  "EngineCylinders: <b>" + d.EngineCylinders + "</b><br/>" +
+				  "AverageHighwayMPG: <b>" + d.AverageHighwayMPG + "</b><br/>" +
+				  "AverageCityMPG: <b>" + d.AverageCityMPG + "</b>";				  
+
 
   tooltip.html(html)
 	  .style("left", (d3.event.pageX + 15) + "px")
@@ -175,7 +176,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 58");
+console.log("I am in init 60");
 
 d3.select("svg")
 .append("g")
