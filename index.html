@@ -44,44 +44,16 @@ circle {stroke: black;}
 
 
 
-a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.previous {
-  background-color: #f1f1f1;
-  color: black;
-  position: relative;
-  left: 200px;
-  top: 50px; 
-  
-}
-
-.next {
-  background-color: #4CAF50;
-  color: white;
-  position: relative;
-  left: 200px;
-  top: 50px; 
-}
-
-
 </style>
 <body onload='init()'>
-
-<a href="#" class="previous">&laquo; Previous Fuel Type</a>
-<a href="#" class="next">Next Fuel Type &raquo;</a>
-
 
 <div class="btn-group">
   <button onclick="update(data_allfueltype)">All Fuel Types</button>
   <button onclick="update(data_electricity)">Electicity</button>
   <button onclick="update(data_diesel)">Diesel</button>
   <button onclick="update(data_gasoline)">Gasoline</button>
-  <button class="w3-button w3-light-grey">&laquo; Previous</button>
-  <button class="w3-button w3-green">Next &raquo;</button>
-
+  <button class="w3-button w3-light-grey" onclick="mynext()">&laquo</button>
+  <button class="w3-button w3-green" onclick="mynext()">&raquo;</button>
 </div>
 
 <!-- Initialize a select button -->
@@ -93,7 +65,7 @@ a:hover {
 
 <script>
 
-console.log("I am in init 125");
+console.log("I am in init 127");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -385,6 +357,9 @@ d3.select("svg")
 
 }
 
+function mynext(){
+console.log("mynext");
+}
 
 </script>
 </body>
