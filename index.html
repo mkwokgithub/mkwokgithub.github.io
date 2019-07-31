@@ -127,7 +127,7 @@ svg.append("text")
 
 
 // Define our scales
-var colorScale = d3.schemeCategory20();
+//var colorScale = d3.schemeCategory20;
 
 // Add the tooltip container to the vis container
 // it's invisible and its position/contents are defined during mouseover
@@ -137,9 +137,8 @@ var tooltip = d3.select("#my_dataviz").append("div")
 
 // tooltip mouseover event handler
 var tipMouseover = function(d) {
-  var color = colorScale(d.Make);
-  var html  = "<br/>" +
-			  "<span style='color:" + color + ";'>" + d.Make + "</span><br/>" +
+//  var color = colorScale(d.Make);
+  var html  = "<br/>"d.Make<br/>" +
 			  "<b>" + d.EngineCylinders + "</b> EngineCylinders, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
 
   tooltip.html(html)
@@ -170,7 +169,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 52");
+console.log("I am in init 54");
 
 d3.select("svg")
 .append("g")
