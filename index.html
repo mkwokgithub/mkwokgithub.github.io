@@ -138,9 +138,14 @@ var tooltip = d3.select("#my_dataviz").append("div")
 // tooltip mouseover event handler
 var tipMouseover = function(d) {
 //  var color = colorScale(d.Make);
-                  var html  = d.Make + "<br/>" +
-                              "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
-                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
+//                  var html  = d.Make + "<br/>" +
+//                              "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
+//                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
+	  var html  = d.Make + "<br/>" +
+				  "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
+				  "<b>" + d.EngineCylinders + "</b> EngineCylinders <b/><br/>" +
+				  "<b>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG <b/><br/>" + 
+				  "<b>" + d.AverageCityMPG + "</b> AverageCityMPG <b/>";
 
   tooltip.html(html)
 	  .style("left", (d3.event.pageX + 15) + "px")
