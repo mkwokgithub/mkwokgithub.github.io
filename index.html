@@ -143,7 +143,7 @@ var tipMouseover = function(d) {
 //                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
 	  var html  = d.Make + "<br/>" +
 				  "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
-				  "<b>" + d.EngineCylinders + "</b> EngineCylinders <b/><br/>" +
+				  "<b>" + d.EngineCylinders + "</b>EngineCylinders<br/>" +
 				  "<b>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG<br/>" + 
 				  "<b>" + d.AverageCityMPG + "</b> AverageCityMPG";
 
@@ -175,7 +175,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 56");
+console.log("I am in init 58");
 
 d3.select("svg")
 .append("g")
