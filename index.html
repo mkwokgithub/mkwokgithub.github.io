@@ -43,6 +43,7 @@ circle {fill: lightblue; stroke: black;}
 </div>
 
 <!-- Create a div where the graph will take place -->
+
 <div id="my_dataviz"></div>
 
 <script>
@@ -78,19 +79,6 @@ svg.append("g")
 
 
 
-
-
-
-
-// Initialize an Y axis
-var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
-var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
-
-svg.append("g")
-  .attr("class","myYaxis")
-  .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
-
-
 // Create the X axis:
 svg.selectAll(".myXaxis")
     .transition()
@@ -109,8 +97,20 @@ svg.append("text")
       .text("Average City MPG (in base 10 log scale)");
 
 
+// Initialize an Y axis
+
+var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
+var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
+
+svg.append("g")
+  .attr("class","myYaxis")
+  .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
+
+
+
 // create the Y axis
-  svg.selectAll(".myYaxis")
+
+svg.selectAll(".myYaxis")
     .transition()
     .duration(100)
     .call(yAxis);
@@ -141,7 +141,7 @@ console.log("I am in init 46");
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+70)+")")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  d.Fuel == "Diesel";}))
 .enter().append("circle")
@@ -170,7 +170,7 @@ console.log("margin top " + margin_top.value);
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+70)+")")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
 .selectAll("circle")
 .data(mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;}))
 .enter().append("circle")
