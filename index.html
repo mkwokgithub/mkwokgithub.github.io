@@ -42,8 +42,30 @@ circle {stroke: black;}
     background-color: white;
 }
 
+
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
 </style>
 <body onload='init()'>
+
+<a href="#" class="previous">&laquo; Previous</a>
+<a href="#" class="next">Next &raquo;</a>
+
 
 <div class="btn-group">
   <button onclick="update(data_allfueltype)">All Fuel Types</button>
@@ -61,7 +83,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 119");
+console.log("I am in init 121");
 
 // Define our colors
 var mygreen = "#00ff00";
