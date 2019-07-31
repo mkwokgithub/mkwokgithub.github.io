@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 110");
+console.log("I am in init 112");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -244,6 +244,7 @@ d3.select("#selectButton")
 	.data(myGroup)
   .enter()
 	.append('option')
+	.attr("transform","translate("+ 350 +","+ 50 +")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
@@ -302,6 +303,7 @@ d3.select("#selectButton")
 	.data(myGroup)
   .enter()
 	.append("option")
+	.attr("transform","translate("+ 350 +","+ 50 +")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
   
