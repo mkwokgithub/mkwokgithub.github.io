@@ -80,14 +80,12 @@ svg.append("g")
 
 
 // Create the X axis:
-//svg.selectAll(".myXaxis")
-//    .transition()
-//    .duration(100)
-//    .call(xAxis);
-
+svg.selectAll(".myXaxis")
+    .transition()
+    .duration(100)
+    .call(xAxis);
 
 // Create X axis label:
-
 svg.append("text")
       .attr("transform",
             "translate(" + (margin_left.value + chart_width.value/2) + " ," +
@@ -98,7 +96,6 @@ svg.append("text")
 
 
 // Initialize an Y axis
-
 var y = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
 var yAxis = d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
 
@@ -106,17 +103,13 @@ svg.append("g")
   .attr("class","myYaxis")
   .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
-
-
 // create the Y axis
-
-//svg.selectAll(".myYaxis")
-//    .transition()
-//    .duration(100)
-//    .call(yAxis);
+svg.selectAll(".myYaxis")
+    .transition()
+    .duration(100)
+    .call(yAxis);
 
 // Create Y axis label:
-
 svg.append("text")
   .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
   .attr("text-anchor", "middle")
@@ -136,10 +129,8 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 });
 
 d3.selectAll("circle").remove();
-d3.selectAll(".myYaxis").remove();
-d3.selectAll(".myXaxis").remove();
 
-console.log("I am in init 48");
+console.log("I am in init 49");
 
 d3.select("svg")
 .append("g")
@@ -151,18 +142,6 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders*1.5 + 8;});
-
-
-
-svg.selectAll(".myYaxis")
-    .transition()
-    .duration(100)
-    .call(yAxis);
-	
-svg.selectAll(".myXaxis")
-    .transition()
-    .duration(100)
-    .call(xAxis);
 
 }
 
@@ -178,8 +157,6 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 });
 
 d3.selectAll("circle").remove();
-d3.selectAll(".myYaxis").remove();
-d3.selectAll(".myXaxis").remove();
 
 console.log("I am in update " + fuel);
 console.log("margin left " + margin_left.value);
@@ -194,17 +171,6 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders*1.5 + 8;});
-
-
-svg.selectAll(".myYaxis")
-    .transition()
-    .duration(100)
-    .call(yAxis);
-	
-svg.selectAll(".myXaxis")
-    .transition()
-    .duration(100)
-    .call(xAxis);
 
 }
 
