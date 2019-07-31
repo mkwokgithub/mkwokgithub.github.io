@@ -42,10 +42,10 @@ circle {stroke: black;}
     background-color: white;
 }
 
-.styled-select select {
-	position: relative;
-	left: 200px;
-	top: 50px; 
+//.styled-select select {
+//	position: relative;
+//	left: 200px;
+//	top: 50px; 
 //	background: transparent;
 //	width: 200px;
 //	padding-top: 5px;
@@ -60,7 +60,7 @@ circle {stroke: black;}
 //	-moz-appearance: none;
 //	-o-appearance: none;
 //	z-index: 2;
-}
+//}
 
 </style>
 <body onload='init()'>
@@ -75,7 +75,7 @@ circle {stroke: black;}
 </div>
 
 <!-- Initialize a select button -->
-<select id="selectButton"></select>
+<select id="selectButton" style="position:absolute;top:50px;left:400px;"></select>
 
 <!-- Create a div where the graph will take place -->
 
@@ -84,7 +84,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 161");
+console.log("I am in init 163");
 
 var currentselect = "";
 
