@@ -46,10 +46,10 @@ circle {stroke: black;}
 <body onload='init()'>
 
 <div class="btn-group">
+  <button onclick="update(data_allfueltype)">All Fuel Types</button>
   <button onclick="update(data_electricity)">Electicity</button>
   <button onclick="update(data_diesel)">Diesel</button>
   <button onclick="update(data_gasoline)">Gasoline</button>
-  <button onclick="update(data_allfueltype)">All Fuel Types</button>
 </div>
 
 <!-- Initialize a select button -->
@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 75");
+console.log("I am in init 77");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -191,7 +191,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-myfilterdata = mydata.filter(function(d){return  d.Fuel == "Electricity";})
+myfilterdata = mydata;//mydata.filter(function(d){return  d.Fuel == "Electricity";})
 
 d3.select("svg")
 .append("g")
@@ -212,7 +212,7 @@ d3.select("svg")
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
 
-var myGroup = d3.map(mydata, function(d){return(d.Make)}).keys()
+var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 
 // add the options to the button
 d3.select("#selectButton")
@@ -270,13 +270,13 @@ d3.select("svg")
 }
 
  // add the options to the button
-    d3.select("#selectButton")
-      .selectAll('myOptions')
-     	.data(allGroup)
-      .enter()
-    	.append('option')
-      .text(function (d) { return d; }) // text showed in the menu
-      .attr("value", function (d) { return d; }) // corresponding value returned by the button
+//    d3.select("#selectButton")
+//      .selectAll('myOptions')
+//     	.data(allGroup)
+//      .enter()
+//    	.append('option')
+//      .text(function (d) { return d; }) // text showed in the menu
+//      .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
 
 
