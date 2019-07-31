@@ -72,6 +72,7 @@ circle {stroke: black;}
   <button onclick="update(data_gasoline)">Gasoline</button>
   <button class="w3-button w3-light-grey" onclick="mynext()">&laquo</button>
   <button class="w3-button w3-green" onclick="mynext()">&raquo;</button>
+  <button onclick=Highlight(this)/>
 </div>
 
 <!-- Initialize a select button -->
@@ -84,7 +85,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 177");
+console.log("I am in init 179");
 
 var currentselect = "";
 
@@ -400,6 +401,12 @@ d3.select("svg")
 
 function mynext(){
 console.log("mynext");
+}
+
+
+function Highlight(button) {
+   $(".Highlight").removeClass("Highlight");
+   $(button).addClass("Highlight");
 }
 
 </script>
