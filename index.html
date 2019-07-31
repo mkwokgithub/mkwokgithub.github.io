@@ -2,7 +2,8 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <style> 
 
-circle {fill: lightblue; stroke: black;} 
+//circle {fill: lightblue; stroke: black;} 
+circle {stroke: black;} 
 
 .btn-group button {
   background-color: #4CAF50; /* Green background */
@@ -126,8 +127,11 @@ svg.append("text")
   .text("Average Highway MPG (in base 10 log scale)");
 
 
-// Define our scales
-//var colorScale = d3.schemeCategory20;
+// Define our colors
+var green = "#00ff00";
+var yellow = "#e6c200";
+var blue = "#00ffff";
+
 
 // Add the tooltip container to the vis container
 // it's invisible and its position/contents are defined during mouseover
@@ -141,7 +145,13 @@ var tipMouseover = function(d) {
 //                  var html  = d.Make + "<br/>" +
 //                              "<span style='color:" + 5 + ";'>" + d.Make + "</span><br/>" +
 //                              "<b>" + d.AverageCityMPG + "</b> AverageCityMPG, <b/>" + d.AverageHighwayMPG + "</b> AverageHighwayMPG";
-	  var html  = "Make: <span style='color:#00ff00;'><b>" + d.Make + "</b></span><br/>" +  
+	  var color = "";
+	  
+	  if (d.Fuel == "Electicity") { color = green};
+	  if (d.Fuel == "Diesel") { color = yellow};
+	  if (d.Fuel == "Gasoline") { color = blue};
+	  
+	  var html  = "Make: <span style='color:"+color+";'><b>" + d.Make + "</b></span><br/>" +  
 				  "Fuel: <b>" + d.Fuel + "</b><br/>" +
 				  "EngineCylinders: <b>" + d.EngineCylinders + "</b><br/>" +
 				  "AverageHighwayMPG: <b>" + d.AverageHighwayMPG + "</b><br/>" +
@@ -163,6 +173,7 @@ var tipMouseout = function(d) {
 	  .style("opacity", 0); // don't care about position!
 };
 
+
 async function init() {
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
@@ -176,7 +187,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-console.log("I am in init 63");
+console.log("I am in init 65");
 
 d3.select("svg")
 .append("g")
@@ -188,6 +199,11 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            // <== Add these
+          if (d.Fuel == "Electicity") {return green;}  // <== Add these
+          else if (d.Fuel == "Diesel"){ return yellow; }
+          else {return blue;}		  // <== Add these
+;}) 
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
 
@@ -219,6 +235,11 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            // <== Add these
+          if (d.Fuel == "Electicity") {return green;}  // <== Add these
+          else if (d.Fuel == "Diesel"){ return yellow; }
+          else {return blue;}		  // <== Add these
+;})     
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
 }
