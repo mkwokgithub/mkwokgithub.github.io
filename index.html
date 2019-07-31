@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 95");
+console.log("I am in init 97");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -259,6 +259,8 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.transition()
+.duration(2000)
 .style("fill", function(d) {            
           if (d.Fuel == "Electricity") {return mygreen;}  
           else if (d.Fuel == "Diesel"){ return myblue; }
@@ -311,6 +313,8 @@ d3.select("svg")
 .attr("cx",function(d,i){return x(d.AverageCityMPG);})
 .attr("cy",function(d,i){return y(d.AverageHighwayMPG);})
 .attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.transition()
+.duration(2000)
 .style("fill", function(d) {            
           if (d.Fuel == "Electricity") {return mygreen;}  
           else if (d.Fuel == "Diesel"){ return myblue; }
