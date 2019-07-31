@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 134");
+console.log("I am in init 135");
 
 var currentselect = "";
 
@@ -141,10 +141,6 @@ svg.append("text")
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
   .text("Average Highway MPG (in base 10 log scale)");
-
-
-
-
 
 
 // Add the tooltip container to the my_dataviz container
@@ -230,7 +226,7 @@ myfilterdata = mydata;//mydata.filter(function(d){return  d.Fuel == "Electricity
 svg.selectAll("my_title")
       svg.append("text")
       .attr("transform",
-            "translate(" + chart_width.value + " ," +
+            "translate(" + (margin_left + 100) + " ," +
                            margin_top.value + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
@@ -295,17 +291,18 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("option").remove();
-d3.select("#my_title").selectAll("text").remove();
+d3.selectAll("my_title").remove();
 
 // Create title:
-svg.select("#my_title")
-      .append("text")
+svg.selectAll("my_title")
+      svg.append("text")
       .attr("transform",
-            "translate(" + chart_width.value + " ," +
-                           (margin_top.value + 50) + ")")
+            "translate(" + (margin_left + 100) + " ," +
+                           margin_top.value + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
       .text("Fuel Efficiency for " + fuel);
+
 
 myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
 
