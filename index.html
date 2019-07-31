@@ -61,7 +61,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 109");
+console.log("I am in init 110");
 
 // Define our colors
 var mygreen = "#00ff00";
@@ -182,7 +182,7 @@ fuelColor = [mygreen,myblue,myred];
 
 legend = svg.append("g")
       .attr("transform",
-            "translate(" + chart_width.value + " ," + chart_height.value + ")");
+            "translate(" + (chart_width.value + 20) + " ," + (chart_height.value - 20) + ")");
 
 data_allfueltype.forEach((value, index) => {
   legendRow = legend.append("g")
