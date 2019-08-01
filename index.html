@@ -84,10 +84,11 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 183");
+console.log("I am in init 185");
 
-var currentselect = "";
+var lastselect = "";
 
+var buttonbackgroundcolor = '#93c2e9';
 // Define our colors
 var mygreen = "#00ff00";
 var myblue = "#0080ff";
@@ -296,8 +297,18 @@ d3.select("#selectButton").on("change", function(d) {
 
 async function update(fuel) {
 
+document.getElementById('alltypebutton').style.backgroundColor='';
+document.getElementById('electricitybutton').style.backgroundColor='';
+document.getElementById('dieselbutton').style.backgroundColor='';
+document.getElementById('gasolinebutton').style.backgroundColor='';
 
-document.getElementById('alltypebutton').style.backgroundColor='#93c2e9'
+if (fuel == "Electricity") {
+document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
+} else if (fuel == "Diesel") {
+document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
+} else if (fuel == "Gasoline") {
+document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
+}
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
