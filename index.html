@@ -84,7 +84,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 189");
+console.log("I am in init 191");
 
 var lastselect = "";
 
@@ -310,8 +310,8 @@ d3.select("#selectButton").on("change", function(d) {
 
 // UPDATE FUNCTION
 
-//async function update(fuel) {
-function update(fuel) {
+async function update(fuel) {
+
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
 document.getElementById('dieselbutton').style.backgroundColor='';
@@ -327,8 +327,7 @@ document.getElementById('gasolinebutton').style.backgroundColor=buttonbackground
 document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 }
 
-//let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
-let mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
     d.AverageCityMPG = +d.AverageCityMPG;
     d.AverageHighwayMPG = +d.AverageHighwayMPG;
@@ -431,11 +430,31 @@ d3.select("svg")
 }
 
 function mynext(){
-console.log("mynext");
+	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
+	console.log("last selected is gasoline");
+	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+	console.log("last selected is electricity");
+	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
+	console.log("last selected is diesel");
+	} else if (document.getElementById('alltypebutton').style.backgroundColor != "") {
+	console.log("last selected is all type");
+	} else {
+	console.log("no selected");
+	}
 }
 
 function myprevious(){
-console.log("mynext");
+	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
+	console.log("last selected is gasoline");
+	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+	console.log("last selected is electricity");
+	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
+	console.log("last selected is diesel");
+	} else if (document.getElementById('alltypebutton').style.backgroundColor != "") {
+	console.log("last selected is all type");
+	} else {
+	console.log("no selected");
+	}
 }
 
 </script>
