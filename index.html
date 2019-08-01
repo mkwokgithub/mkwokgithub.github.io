@@ -70,7 +70,7 @@ circle {stroke: black;}
   <button id="electricitybutton" onclick="update(data_electricity)">Electicity</button>
   <button id="dieselbutton" onclick="update(data_diesel)">Diesel</button>
   <button id="gasolinebutton" onclick="update(data_gasoline)">Gasoline</button>
-  <button id="previousbutton" class="w3-button w3-light-grey" onclick="mynext()">&laquo</button>
+  <button id="previousbutton" class="w3-button w3-light-grey" onclick="myprevious()">&laquo</button>
   <button id="nextbutton" class="w3-button w3-green" onclick="mynext()">&raquo;</button>
 </div>
 
@@ -84,7 +84,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 187");
+console.log("I am in init 189");
 
 var lastselect = "";
 
@@ -310,8 +310,8 @@ d3.select("#selectButton").on("change", function(d) {
 
 // UPDATE FUNCTION
 
-async function update(fuel) {
-
+//async function update(fuel) {
+function update(fuel) {
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
 document.getElementById('dieselbutton').style.backgroundColor='';
@@ -327,7 +327,8 @@ document.getElementById('gasolinebutton').style.backgroundColor=buttonbackground
 document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 }
 
-let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+//let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+let mydata = d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
     d.AverageCityMPG = +d.AverageCityMPG;
     d.AverageHighwayMPG = +d.AverageHighwayMPG;
@@ -433,6 +434,9 @@ function mynext(){
 console.log("mynext");
 }
 
+function myprevious(){
+console.log("mynext");
+}
 
 </script>
 </body>
