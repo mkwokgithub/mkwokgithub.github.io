@@ -84,7 +84,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 185");
+console.log("I am in init 187");
 
 var lastselect = "";
 
@@ -161,6 +161,15 @@ svg.append("text")
   .style("font-weight", "bold")
   .text("Average Highway MPG (in base 10 log scale)");
 
+// Create title
+
+svg.append("text")
+      .attr("transform",
+            "translate(" + (margin_left.value + 300) + " ," +
+                           margin_top.value + ")")
+      .style("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Fuel Efficiency for Fuel Type of Electricity, Diesel, or Gasoline");
 
 // Add the tooltip container to the my_dataviz container
 // it's invisible and its position/contents are defined during mouseover
@@ -223,8 +232,11 @@ data_allfueltype.forEach((value, index) => {
     .text(value)
 });
 
+// INIT FUNCTION
 
 async function init() {
+
+document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
@@ -295,6 +307,9 @@ d3.select("#selectButton").on("change", function(d) {
 
 }
 
+
+// UPDATE FUNCTION
+
 async function update(fuel) {
 
 document.getElementById('alltypebutton').style.backgroundColor='';
@@ -308,6 +323,8 @@ document.getElementById('electricitybutton').style.backgroundColor=buttonbackgro
 document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
 } else if (fuel == "Gasoline") {
 document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
+} else {
+document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 }
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
