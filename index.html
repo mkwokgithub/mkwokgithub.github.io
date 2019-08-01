@@ -1,5 +1,6 @@
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <style> 
 
 //circle {fill: lightblue; stroke: black;} 
@@ -230,6 +231,33 @@ data_allfueltype.forEach((value, index) => {
     .text(value)
 });
 
+
+// Annotation
+
+const annotations = [
+  {
+    note: {
+      label: "Here is the annotation label",
+      title: "Annotation title"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: 20,         // circle radius
+      radiusPadding: 20   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: 40,
+    y: 160,
+    dy: 70,
+    dx: 70
+  }
+]
+
+const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+
+
+
 // INIT FUNCTION
 
 async function init() {
@@ -278,6 +306,11 @@ d3.select("svg")
 ;}) 
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
+
+
+d3.select("svg")
+  .append("g")
+  .call(makeAnnotations)
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 myGroup = ["Select a Make"].concat(myGroup);
@@ -368,6 +401,12 @@ d3.select("svg")
 ;})      
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
+
+
+d3.select("svg")
+  .append("g")
+  .call(makeAnnotations)
+
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 
