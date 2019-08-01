@@ -84,7 +84,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am in init 191");
+console.log("I am in init 193");
 
 var lastselect = "";
 
@@ -430,31 +430,24 @@ d3.select("svg")
 }
 
 function mynext(){
-	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
-	console.log("last selected is gasoline");
+	if (document.getElementById('alltypebutton').style.backgroundColor != "") {
+		update(data_electricity);
 	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
-	console.log("last selected is electricity");
-	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
-	console.log("last selected is diesel");
-	} else if (document.getElementById('alltypebutton').style.backgroundColor != "") {
-	console.log("last selected is all type");
-	} else {
-	console.log("no selected");
-	}
+		update(data_diesel);
+	} else if (document.getElementById('dieselbutton').style.backgroundColor != ""){
+		update(data_gasoline);
+	} else {}
+
 }
 
 function myprevious(){
 	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
-	console.log("last selected is gasoline");
-	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
-	console.log("last selected is electricity");
+		update(data_diesel);
 	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
-	console.log("last selected is diesel");
-	} else if (document.getElementById('alltypebutton').style.backgroundColor != "") {
-	console.log("last selected is all type");
-	} else {
-	console.log("no selected");
-	}
+		update(data_electricity);
+	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+		update(data_allfueltype);
+	} else {} 
 }
 
 </script>
