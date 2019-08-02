@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 15");
+console.log("I am here 17");
 
 var lastselect = "";
 
@@ -387,28 +387,28 @@ var points = groups.map(function (p) {
 
 console.log(points);
 
-var circles = [{ x: d3.sum(points[0], function(d){
-						return d.x;})/ points[0].length,
-				y: d3.sum(points[0], function(d){
-						return d.y;})/ points[0].length, 
+var circles = [{ x: (d3.sum(points[0], function(d){
+						return d.x;})/ points[0].length) + margin_top.value+50,
+				y: (d3.sum(points[0], function(d){
+						return d.y;})/ points[0].length) + margin_left.value+100, 
 				r:20
 			  },
-			  { x: d3.sum(points[1], function(d){
-						return d.x;})/ points[1].length,
-				y: d3.sum(points[1], function(d){
-						return d.y;})/ points[1].length, 
+			  { x: (d3.sum(points[1], function(d){
+						return d.x;})/ points[1].length)  + margin_top.value+50,
+				y: (d3.sum(points[1], function(d){
+						return d.y;})/ points[1].length) + margin_left.value+100, 
 				r:20
 			  },
-			  { x: d3.sum(points[2], function(d){
-						return d.x;})/ points[2].length,
-				y: d3.sum(points[2], function(d){
-						return d.y;})/ points[2].length, 
+			  { x: (d3.sum(points[2], function(d){
+						return d.x;})/ points[2].length)  + margin_top.value+50,
+				y: (d3.sum(points[2], function(d){
+						return d.y;})/ points[2].length) + margin_left.value+100, 
 				r:20
 			  },
-			  { x: d3.sum(points[3], function(d){
-						return d.x;})/ points[3].length,
-				y: d3.sum(points[3], function(d){
-						return d.y;})/ points[3].length, 
+			  { x: (d3.sum(points[3], function(d){
+						return d.x;})/ points[3].length)  + margin_top.value+50,
+				y: (d3.sum(points[3], function(d){
+						return d.y;})/ points[3].length) + margin_left.value+100, 
 				r:20
 			  }
 			 ];
