@@ -47,10 +47,10 @@ circle {stroke: black;}
 <body onload='init()'>
 
 <div class="btn-group">
+  <button id="alltypebutton" onclick="update(data_allfueltype)">All Fuel Types</button>
   <button id="electricitybutton" onclick="update(data_electricity)">Electicity</button>
   <button id="dieselbutton" onclick="update(data_diesel)">Diesel</button>
   <button id="gasolinebutton" onclick="update(data_gasoline)">Gasoline</button>
-  <button id="alltypebutton" onclick="update(data_allfueltype)">All Fuel Types</button>
   <button id="previousbutton" class="w3-button w3-light-grey" onclick="myprevious()">&laquo</button>
   <button id="nextbutton" class="w3-button w3-green" onclick="mynext()">&raquo;</button>
 </div>
@@ -65,7 +65,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 81");
+console.log("I am here 79");
 
 var lastselect = "";
 
