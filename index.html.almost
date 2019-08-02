@@ -1,0 +1,941 @@
+<html>
+//<script src='https://d3js.org/d3.v5.min.js'></script>
+<script src='https://d3js.org/d3.v5.js'></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+<style> 
+
+//circle {fill: lightblue; stroke: black;} 
+circle {stroke: black;} 
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  position: relative;
+  left: 200px;
+  top: 50px; 
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+.tooltip {
+    position: absolute;
+    font-size: 12px;
+    width:  auto;
+    height: auto;
+    pointer-events: none;
+    background-color: white;
+}
+
+//.styled-select select {
+//	position: relative;
+//	left: 200px;
+//	top: 50px; 
+//	background: transparent;
+//	width: 200px;
+//	padding-top: 5px;
+//	font-size: 32px;
+//	font-weight: bold;
+//	font-family: 'PT Sans', sans-serif;
+//	color: #4F9DD0;
+//	line-height: 1;
+//	border: 0;
+//	border-radius: 4;
+//	-webkit-appearance: none;
+//	-moz-appearance: none;
+//	-o-appearance: none;
+//	z-index: 2;
+//}
+
+</style>
+<body onload='init()'>
+
+<div class="btn-group">
+  <button id="alltypebutton" onclick="update(data_allfueltype)">All Fuel Types</button>
+  <button id="electricitybutton" onclick="update(data_electricity)">Electicity</button>
+  <button id="dieselbutton" onclick="update(data_diesel)">Diesel</button>
+  <button id="gasolinebutton" onclick="update(data_gasoline)">Gasoline</button>
+  <button id="previousbutton" class="w3-button w3-light-grey" onclick="myprevious()">&laquo</button>
+  <button id="nextbutton" class="w3-button w3-green" onclick="mynext()">&raquo;</button>
+</div>
+
+<!-- Initialize a select button -->
+<select id="selectButton"></select>
+
+<!-- Create a div where the graph will take place -->
+
+<div id="my_dataviz"></div>
+<div id="my_title"></div>
+
+<script>
+
+console.log("I am here 53");
+
+var lastselect = "";
+
+var buttonbackgroundcolor = '#93c2e9';
+// Define our colors
+var mygreen = "#00ff00";
+var myblue = "#0080ff";
+var myred = "#ff0000";
+
+var data_diesel = ["Diesel"];
+var data_electricity = ["Electricity"];
+var data_gasoline = ["Gasoline"];
+var data_allfueltype = ["Electricity","Diesel","Gasoline"];
+
+var margin_top = {value: 70};
+var margin_left = {value: 100};
+var chart_width = {value:800};
+var chart_height = {value:600};
+var svg_width = {value:1100};
+var svg_height = {value:900};
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", svg_width.value)
+    .attr("height", svg_height.value)
+  .append("g")
+    .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
+
+// Initialise a X axis:
+var xScale = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
+var xAxis = d3.axisBottom(xScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s"));
+
+svg.append("g")
+  .attr("class","myXaxis")
+  .attr("transform","translate("+margin_left.value+","+(margin_top.value+chart_height.value)+")");
+
+
+
+// Create the X axis:
+svg.selectAll(".myXaxis")
+    .transition()
+    .duration(100)
+    .call(xAxis);
+
+// Create X axis label:
+svg.append("text")
+      .attr("transform",
+            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
+                           (chart_height.value + margin_top.value + 50) + ")")
+      .style("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Average City MPG (in base 10 log scale)");
+
+
+// Initialize an Y axis
+var yScale = d3.scaleLog().domain([10,150]).range([chart_height.value,0]);
+var yAxis = d3.axisLeft(yScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s")); 
+
+svg.append("g")
+  .attr("class","myYaxis")
+  .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
+
+// create the Y axis
+svg.selectAll(".myYaxis")
+    .transition()
+    .duration(100)
+    .call(yAxis);
+
+// Create Y axis label:
+svg.append("text")
+  .attr("transform", "translate("+ (margin_left.value - 50) +","+(chart_height.value/2 + margin_top.value )+")rotate(-90)")
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .text("Average Highway MPG (in base 10 log scale)");
+
+// Create title
+
+svg.append("text")
+      .attr("transform",
+            "translate(" + (margin_left.value + 300) + " ," +
+                           margin_top.value + ")")
+      .style("text-anchor", "middle")
+      .style("font-weight", "bold")
+      .text("Vehicle Fuel Efficiency for Fuel Type of Electricity, Diesel, and Gasoline");
+
+// Add the tooltip container to the my_dataviz container
+// it's invisible and its position/contents are defined during mouseover
+var tooltip = d3.select("#my_dataviz").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+// tooltip mouseover event handler
+var tipMouseover = function(d) {
+  var color = "";
+  
+  if (d.Fuel == "Electricity") { color = mygreen};
+  if (d.Fuel == "Diesel") { color = myblue};
+  if (d.Fuel == "Gasoline") { color = myred};
+  
+  var html  = "Make: <b>" + d.Make + "</b><br/>" +
+			  "Fuel: <span style='color:" + color + ";'><b>" + d.Fuel + "</b></span><br/>" +  
+			  "EngineCylinders: <b>" + d.EngineCylinders + "</b><br/>" +
+			  "AverageHighwayMPG: <b>" + d.AverageHighwayMPG + "</b><br/>" +
+			  "AverageCityMPG: <b>" + d.AverageCityMPG + "</b>";				  
+
+  tooltip.html(html)
+	  .style("left", (d3.event.pageX + 15) + "px")
+	  .style("top", (d3.event.pageY - 28) + "px")
+	.transition()
+	  .duration(200) // ms
+	  .style("opacity", .9) // started as 0!
+
+};
+
+// tooltip mouseout event handler
+var tipMouseout = function(d) {
+  tooltip.transition()
+	  .duration(300) // ms
+	  .style("opacity", 0); // don't care about position!
+};
+
+
+// legend
+fuelColor = [mygreen,myblue,myred];
+
+legend = svg.append("g")
+      .attr("transform",
+            "translate(" + (chart_width.value + 20) + " ," + (chart_height.value - 100) + ")");
+
+data_allfueltype.forEach((value, index) => {
+  legendRow = legend.append("g")
+    .attr("transform", "translate(0, " + (index * 20) + ")");
+ 
+  legendRow.append("rect")
+    .attr("width", 10)
+    .attr("height", 10)
+    .attr("fill", fuelColor[index]);
+ 
+  legendRow.append("text")
+    .attr("x", -10)
+    .attr("y", 10)
+    .attr("text-anchor", "end")
+    .style("text-transform", "capitalize")
+    .text(value)
+});
+
+
+// Annotation
+
+var groups = ["gp-0", "gp-2-3-4", "gp-6", "gp-8-10-12"];
+var gp_0 = [0];
+var gp_2_3_4 = [2,3,4];
+var gp_6 = [6];
+var gp_8_10_12 = [8,10,12];
+
+//var circle = datapoints.map(function (p) {
+//return d3.packEnclose(p);
+//});
+
+//var annotations = [
+//  {
+//    note: {
+//      label: "0 Cylinder",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[0].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[0].x,
+//    y: circle[0].y,
+//    dy: 93,
+//    dx: 176
+ // },
+    
+ // {
+//    note: {
+//      label: "2,3,or 4 Cylinders ",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[1].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[1].x,
+ //   y: circle[1].y,
+//    dy: 93,
+//    dx: 176
+//  },
+//    {
+ //   note: {
+//      label: "6 Cylinders",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[2].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//   color: ["red"],
+//    x: circle[2].x,
+//    y: circle[2].y,
+//    dy: 93,
+//    dx: 176
+//  },
+//  {
+//    note: {
+ //     label: "8 Cylinders or above",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[3].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[3].x,
+//    y: circle[3].y,
+//    dy: 93,
+ //   dx: 176
+//  }
+  
+//]
+
+//const makeAnnotations = d3.annotation()
+//  .annotations(annotations)
+ // .accessors({ x: d => d.x , y: d => d.y});
+
+
+
+
+// INIT FUNCTION
+
+async function init() {
+
+document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
+
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+ data.forEach(function(d) {
+    d.AverageCityMPG = +d.AverageCityMPG;
+    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+    d.EngineCylinders = +d.EngineCylinders;
+ });
+ return data;
+});
+
+d3.selectAll("circle").remove();
+//d3.selectAll("my_title").remove();
+
+myfilterdata = mydata;
+
+// Create title:
+//svg.selectAll("my_title")
+//      .append("text")
+//      .attr("transform",
+//            "translate(" + (margin_left.value + 300) + " ," +
+//                           margin_top.value + ")")
+//      .style("text-anchor", "middle")
+//      .style("font-weight", "bold")
+//      .text("Fuel Efficiency for All Fuel Types");
+	  
+//d3.select("svg")
+//.append("g")
+//.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+//.selectAll("circle")
+////.data(mydata.filter(function(d){return  d.Fuel == "Electricity";}))
+//.data(myfilterdata)
+//.enter().append("circle")
+//.attr("opacity",1)
+//.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+//.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+//.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+//.style("fill", function(d) {            // <== Add these
+//          if (d.Fuel == "Electricity") {return mygreen;}  
+//         else if (d.Fuel == "Diesel"){ return myblue; }
+//          else {return myred;}		  
+//;}) 
+//.on("mouseover", tipMouseover)
+//.on("mouseout", tipMouseout);
+
+// annotation:
+
+var points = groups.map(function (p) {
+    return  myfilterdata.filter(function (d) {
+		if ( p == "gp-0") {return gp_0.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-2-3-4") {return gp_2_3_4.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-6") {return gp_6.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-8-10-12") {return gp_8_10_12.indexOf(d.EngineCylinders) != -1;}
+    }).map(function (d) {
+      return { x: xScale(d.AverageCityMPG) , y: yScale(d.AverageHighwayMPG)};
+    });
+});
+
+// console.log(points);
+
+var circles = [{ x: (d3.sum(points[0], function(d){
+						return d.x;})/ points[0].length),
+				y: (d3.sum(points[0], function(d){
+						return d.y;})/ points[0].length), 
+				r: (d3.max(points[0], function(d){
+						return d.x;}) - d3.min(points[0], function(d){
+						return d.x;}))/2 + 20
+			  },
+			  { x: (d3.sum(points[1], function(d){
+						return d.x;})/ points[1].length),
+				y: (d3.sum(points[1], function(d){
+						return d.y;})/ points[1].length), 
+				r: (d3.max(points[1], function(d){
+						return d.x;}) - d3.min(points[1], function(d){
+						return d.x;}))/2 + 20
+			  },
+			  { x: (d3.sum(points[2], function(d){
+						return d.x;})/ points[2].length),
+				y: (d3.sum(points[2], function(d){
+						return d.y;})/ points[2].length), 
+				r: (d3.max(points[2], function(d){
+						return d.x;}) - d3.min(points[2], function(d){
+						return d.x;}))/2 + 20
+			  },
+			  { x: (d3.sum(points[3], function(d){
+						return d.x;})/ points[3].length),
+				y: (d3.sum(points[3], function(d){
+						return d.y;})/ points[3].length), 
+				r: (d3.max(points[3], function(d){
+						return d.x;}) - d3.min(points[3], function(d){
+						return d.x;}))/2 + 20
+			  }
+			 ];
+  
+// console.log(circles)
+
+
+annotation_0 =   {
+    note: {
+      label: "0 Cylinder",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circles[0].r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circles[0].x,
+    y: circles[0].y,
+    dy: 93,
+    dx: 176
+  };
+  
+annotation_1 =   {
+    note: {
+      label: "2,3,or 4 Cylinders ",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circles[1].r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circles[1].x,
+    y: circles[1].y,
+    dy: 93,
+    dx: 176
+  };
+
+annotation_2 = {
+    note: {
+      label: "6 Cylinders",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circles[2].r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circles[2].x,
+    y: circles[2].y,
+    dy: 93,
+    dx: 176
+  };
+
+annotation_3 = {
+    note: {
+      label: "8 Cylinders or above",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circles[3].r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circles[3].x,
+    y: circles[3].y,
+    dy: 93,
+    dx: 176
+  };
+
+var annotations = [annotation_0,annotation_1,annotation_2,annotation_3];  
+  
+
+// var annotations = [
+//  {
+//    note: {
+//      label: "0 Cylinder",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+ //   subject: {
+ //     radius: circles[0].r,         // circle radius
+ //     radiusPadding: 10   // white space around circle befor connector
+ //   },
+ //   color: ["red"],
+ //   x: circles[0].x,
+ //   y: circles[0].y,
+//    dy: 93,
+ //   dx: 176
+ // },
+    
+//  {
+ //   note: {
+//      label: "2,3,or 4 Cylinders ",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circles[1].r,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+ //   },
+ //   color: ["red"],
+ //   x: circles[1].x,
+ //   y: circles[1].y,
+ //   dy: 93,
+ //   dx: 176
+ // },
+//    {
+ //   note: {
+ //     label: "6 Cylinders",
+ //     title: "Cylinders"
+ //   },
+ //   type: d3.annotationCalloutCircle,
+ //   subject: {
+ //     radius: circles[2].r,         // circle radius
+ //     radiusPadding: 10   // white space around circle befor connector
+//   },
+//    color: ["red"],
+ //   x: circles[2].x,
+ //   y: circles[2].y,
+ //   dy: 93,
+ //   dx: 176
+//  },
+ // {
+ //   note: {
+ //     label: "8 Cylinders or above",
+ //     title: "Cylinders"
+ //   },
+ //   type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circles[3].r,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circles[3].x,
+//    y: circles[3].y,
+ //   dy: 93,
+//    dx: 176
+ // }
+//]
+var makeAnnotations = d3.annotation()
+  .annotations(annotations);
+//  .accessors({ x: d => d.x , y: d => d.y});
+  
+d3.select("svg")
+  .append("g")
+  .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+  .attr("class", "annotation-encircle")
+ // .attr("annotation-encircle")
+  .call(makeAnnotations);
+
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+//.data(mydata.filter(function(d){return  d.Fuel == "Electricity";}))
+.data(myfilterdata)
+.enter().append("circle")
+.attr("opacity",1)
+.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            // <== Add these
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
+;}) 
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
+
+
+
+var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
+myGroup = ["Select a Make"].concat(myGroup);
+
+// add the options to the button
+d3.select("#selectButton")
+   .style("left", "350px")
+   .style("top", "50px")
+//  .attr("transform","translate("+ 350 +","+ 50 +")")
+  .selectAll('myOptions')
+	.data(myGroup)
+  .enter()
+	.append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+
+// When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function(d) {
+	// recover the option that has been chosen
+	var selectedOption = d3.select(this).property("value");
+	// run the updateChart function with this selected option
+	update_w_option(myfilterdata, selectedOption);
+}) 
+
+}
+
+
+// UPDATE FUNCTION
+
+async function update(fuel) {
+
+document.getElementById('alltypebutton').style.backgroundColor='';
+document.getElementById('electricitybutton').style.backgroundColor='';
+document.getElementById('dieselbutton').style.backgroundColor='';
+document.getElementById('gasolinebutton').style.backgroundColor='';
+
+if (fuel == "Electricity") {
+document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
+} else if (fuel == "Diesel") {
+document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
+} else if (fuel == "Gasoline") {
+document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
+} else {
+document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
+}
+
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+ data.forEach(function(d) {
+    d.AverageCityMPG = +d.AverageCityMPG;
+    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+    d.EngineCylinders = +d.EngineCylinders;
+ });
+ return data;
+});
+
+d3.selectAll("circle").remove();
+d3.selectAll("option").remove();
+//d3.select("#my_title").remove();
+
+
+
+
+
+
+// Create title:
+//svg.selectAll("my_title")
+//      .append("text")
+//      .attr("transform",
+//            "translate(" + (margin_left.value + 300) + " ," +
+//                           margin_top.value + ")")
+//      .style("text-anchor", "middle")
+//      .style("font-weight", "bold")
+//      .text("Fuel Efficiency for " + fuel);
+
+myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
+
+
+var points = groups.map(function (p) {
+    return  myfilterdata.filter(function (d) {
+		if ( p == "gp-0") {return gp_0.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-2-3-4") {return gp_2_3_4.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-6") {return gp_6.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-8-10-12") {return gp_8_10_12.indexOf(d.EngineCylinders) != -1;}
+    }).map(function (d) {
+      return { x: xScale(d.AverageCityMPG) , y: yScale(d.AverageHighwayMPG)};
+    });
+});
+
+
+var annotation_0 = "";
+var annotation_1 = "";
+var annotation_2 = "";
+var annotation_3 = "";
+var circle_0 = "";
+var circle_1 = "";
+var circle_2 = "";
+var circle_3 = "";
+var annotations = [];
+
+if (points[0].length > 0) {
+
+console.log("point 0 has data");
+
+circle_0 = { x: (d3.sum(points[0], function(d){
+						return d.x;})/ points[0].length),
+				y: (d3.sum(points[0], function(d){
+						return d.y;})/ points[0].length), 
+				r: (d3.max(points[0], function(d){
+						return d.x;}) - d3.min(points[0], function(d){
+						return d.x;}))/2 + 20
+			};
+
+annotation_0 = {
+    note: {
+      label: "0 Cylinder",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_0.r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle_0.x,
+    y: circle_0.y,
+    dy: 93,
+    dx: 176
+  };
+  
+   annotations = [annotation_0].concat(annotations); 
+  
+};
+
+if (points[1].length > 0) {
+
+console.log("point 1 has data");
+circle_1 = { x: (d3.sum(points[1], function(d){
+						return d.x;})/ points[1].length),
+				y: (d3.sum(points[1], function(d){
+						return d.y;})/ points[1].length), 
+				r: (d3.max(points[1], function(d){
+						return d.x;}) - d3.min(points[1], function(d){
+						return d.x;}))/2 + 20
+			};
+
+annotation_1 = {
+    note: {
+      label: "2,3,or 4 Cylinders",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_1.r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle_1.x,
+    y: circle_1.y,
+    dy: 93,
+    dx: 176
+  };
+   annotations = [annotation_1].concat(annotations); 
+};
+
+if (points[2].length > 0) {
+console.log("point 2 has data");
+circle_2 = { x: (d3.sum(points[2], function(d){
+						return d.x;})/ points[2].length),
+				y: (d3.sum(points[2], function(d){
+						return d.y;})/ points[2].length), 
+				r: (d3.max(points[2], function(d){
+						return d.x;}) - d3.min(points[2], function(d){
+						return d.x;}))/2 + 20
+			};
+
+annotation_2 = {
+    note: {
+      label: "6 Cylinder",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_2.r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle_2.x,
+    y: circle_2.y,
+    dy: 93,
+    dx: 176
+  };
+   annotations = [annotation_2].concat(annotations); 
+};
+
+if (points[3].length > 0) {
+console.log("point 3 has data");
+circle_3 = { x: (d3.sum(points[3], function(d){
+						return d.x;})/ points[3].length),
+				y: (d3.sum(points[3], function(d){
+						return d.y;})/ points[3].length), 
+				r: (d3.max(points[3], function(d){
+						return d.x;}) - d3.min(points[3], function(d){
+						return d.x;}))/2 + 20
+			};
+
+annotation_3 = {
+    note: {
+      label: "8,10,or 12 Cylinders",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_3.r,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle_3.x,
+    y: circle_3.y,
+    dy: 93,
+    dx: 176
+  };
+   annotations = [annotation_3].concat(annotations); 
+};
+
+
+
+console.log(annotations.length);
+
+
+var makeAnnotations = d3.annotation()
+  .annotations(annotations);
+
+d3.select(".annotation-encircle")
+    .call(makeAnnotations);
+	
+// console.log(points);
+
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+//.data(mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;}))
+.data(myfilterdata)
+.enter().append("circle")
+.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
+;})      
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
+
+
+//d3.select("svg")
+//  .append("g")
+//  .call(makeAnnotations)
+
+
+var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
+
+myGroup = ["Select a Make"].concat(myGroup);
+
+// add the options to the button
+d3.select("#selectButton")
+//   .style("left", "350px")
+//   .style("top", "50px")
+//  .attr("transform","translate("+ 350 +","+ 50 +")")
+  .selectAll("myOptions")
+  .attr("transform","translate("+ 350 +","+ 50 +")")
+	.data(myGroup)
+  .enter()
+	.append("option")
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+  
+  
+// When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function(d) {
+	// recover the option that has been chosen
+	var selectedOption = d3.select(this).property("value");
+	// run the updateChart function with this selected option
+	update_w_option(myfilterdata, selectedOption);
+})  
+  
+}
+
+
+function update_w_option(data,option) {
+
+d3.selectAll("circle").remove();
+
+if (option == "Select a Make") {
+	mydata = data;
+} else {
+	mydata = data.filter(function(d){return  option.indexOf(d.Make) != -1;});
+}
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+.data(mydata)
+.enter().append("circle")
+.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
+;})      
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
+
+}
+
+function mynext(){
+	if (document.getElementById('alltypebutton').style.backgroundColor != "") {
+		update(data_electricity);
+	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+		update(data_diesel);
+	} else if (document.getElementById('dieselbutton').style.backgroundColor != ""){
+		update(data_gasoline);
+	} else {}
+
+}
+
+function myprevious(){
+	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
+		update(data_diesel);
+	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
+		update(data_electricity);
+	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+		update(data_allfueltype);
+	} else {} 
+}
+
+</script>
+</body>
+</html>
