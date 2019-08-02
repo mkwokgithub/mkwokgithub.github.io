@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 139");
+console.log("I am here 141");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -105,24 +105,31 @@ var svg = d3.select("#my_dataviz")
 // test text box
 d3.select("svg")
 .append("g")
-.selectAll("rect")
-.enter().append("rect")
-.attr("height", 200)
-.attr("width", 100)
-.append("text")
 .attr("transform","translate("+500+","+margin_top.value+")")
-.attr("class","wrap")
-.text("test comment test comment test commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest comment")
+.selectAll("circle")
+.enter().append("circle")
+.attr("cx", 200)
+.attr("cy", 200)
+.attr("r", 20)
+.style("fill", mygreen);
+//.attr("height", 200)
+//.attr("width", 100)
+//.append("text")
+//.attr("class","wrap")
+//.text("test comment test comment test commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest comment")
 
 
-svg.append("text")
-      .attr("transform",
-            "translate(" + (margin_left.value + chart_width.value/2) + " ," +
-                           (chart_height.value + margin_top.value + 50) + ")")
-      .style("text-anchor", "middle")
-      .style("font-weight", "bold")
-      .text("Average City MPG (in base 10 log scale)");
 
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+.data(myfilterdata)
+.enter().append("circle")
+.attr("opacity",1)
+.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
 
 
 // Initialise a X axis:
@@ -267,7 +274,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
  return data;
 });
 
-d3.selectAll("circle").remove();
+// d3.selectAll("circle").remove();
 
 myfilterdata = mydata.filter(function(d){return  data_electricity.indexOf(d.Fuel) != -1;});
 
