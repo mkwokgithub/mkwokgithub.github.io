@@ -700,7 +700,7 @@ var annotations = [];
 
 if (points[0].length > 0) {
 
-console.log("point 0 has data");
+//console.log("point 0 has data");
 
 circle_0 = { x: (d3.sum(points[0], function(d){
 						return d.x;})/ points[0].length),
@@ -734,7 +734,7 @@ annotation_0 = {
 
 if (points[1].length > 0) {
 
-console.log("point 1 has data");
+// console.log("point 1 has data");
 circle_1 = { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
 				y: (d3.sum(points[1], function(d){
@@ -764,7 +764,7 @@ annotation_1 = {
 };
 
 if (points[2].length > 0) {
-console.log("point 2 has data");
+// console.log("point 2 has data");
 circle_2 = { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
 				y: (d3.sum(points[2], function(d){
@@ -794,7 +794,7 @@ annotation_2 = {
 };
 
 if (points[3].length > 0) {
-console.log("point 3 has data");
+// console.log("point 3 has data");
 circle_3 = { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
@@ -825,7 +825,7 @@ annotation_3 = {
 
 
 
-console.log(annotations.length);
+// console.log(annotations.length);
 
 
 var makeAnnotations = d3.annotation()
@@ -884,13 +884,16 @@ d3.select("#selectButton").on("change", function(d) {
 	// recover the option that has been chosen
 	var selectedOption = d3.select(this).property("value");
 	// run the updateChart function with this selected option
-	update_w_option(myfilterdata, selectedOption);
+//	update_w_option(myfilterdata, selectedOption);
+    update_w_option(selectedOption);
 })  
   
 }
 
 
-async function update_w_option(data,option) {
+async function update_w_option(option) {
+
+console.log("update_w_option: " + option)
 
 d3.selectAll("circle").remove();
 
@@ -952,7 +955,7 @@ var annotations = [];
 
 if (points[0].length > 0) {
 
-console.log("point 0 has data");
+// console.log("point 0 has data");
 
 circle_0 = { x: (d3.sum(points[0], function(d){
 						return d.x;})/ points[0].length),
@@ -986,7 +989,7 @@ annotation_0 = {
 
 if (points[1].length > 0) {
 
-console.log("point 1 has data");
+// console.log("point 1 has data");
 circle_1 = { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
 				y: (d3.sum(points[1], function(d){
@@ -1016,7 +1019,7 @@ annotation_1 = {
 };
 
 if (points[2].length > 0) {
-console.log("point 2 has data");
+// console.log("point 2 has data");
 circle_2 = { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
 				y: (d3.sum(points[2], function(d){
@@ -1046,7 +1049,7 @@ annotation_2 = {
 };
 
 if (points[3].length > 0) {
-console.log("point 3 has data");
+// console.log("point 3 has data");
 circle_3 = { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
@@ -1077,7 +1080,7 @@ annotation_3 = {
 
 
 
-console.log(annotations.length);
+// console.log(annotations.length);
 
 
 var makeAnnotations = d3.annotation()
