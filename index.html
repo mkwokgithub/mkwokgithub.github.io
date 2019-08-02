@@ -446,19 +446,35 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 13");
+console.log(" testbox 15");
 
 // text box
-var g = d3.select("svg")
-.append("g")
-.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-.selectAll("rect")
-.data(testdata)
-.enter().append("rect")
-.attr("height", function(d,i){return d.height;})
-.attr("width", function(d,i){return d.width;})
-//.attr("opacity",1)
-.style("fill", "none");
+
+var svgContainer = d3.select("svg");
+var mycircle = svgContainer.append('g').attr('class', 'circle');
+mycircle.append("circle")
+                          .attr("cx", 65)
+                          .attr("cy", 65)
+                          .attr("r", 65)
+                          .attr('fill','none')
+                          .attr('stroke','#008080')
+                          .attr('class','ourmission')
+mycircle.append('text')
+                          .attr('x', 65)
+                          .attr('y',65)
+                          .attr('dx',65)
+                          .text('this is the text');
+
+//var g = d3.select("svg")
+//.append("g")
+//.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+//.selectAll("rect")
+//.data(testdata)
+//.enter().append("rect")
+//.attr("height", function(d,i){return d.height;})
+//.attr("width", function(d,i){return d.width;})
+////.attr("opacity",1)
+//.style("fill", "none");
 
 g.append("text")
 .attr("dx", -20)
