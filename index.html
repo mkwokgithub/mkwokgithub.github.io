@@ -67,7 +67,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 95");
+console.log("I am here 97");
 
 var lastselect = "";
 
@@ -442,13 +442,13 @@ myGroup = ["Select a Make"].concat(myGroup);
 
 // add the options to the button
 d3.select("#selectButton")
+	.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
    .style("left", "350px")
    .style("top", "50px")
   .selectAll('myOptions')
 	.data(myGroup)
   .enter()
 	.append('option')
-	.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
