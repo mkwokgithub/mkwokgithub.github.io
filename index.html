@@ -446,7 +446,7 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 48");
+console.log(" testbox 50");
 
 // text box
 
@@ -467,7 +467,8 @@ myrect.append('text')
                          // .attr('y',65)
                           .attr('dx', 10)
 						  .attr('dy', 20)
-						  .attr('class','wrap')
+						  //.attr('class','wrap')
+						   .attr("text-anchor", "left")
                           .text('Thishis is the textthis is the textthis is the textthis is the textthis is the textthis is the textthis is the textthis is the text')
 						  .call(wrap, 300);
 
