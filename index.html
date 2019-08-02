@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 13");
+console.log("I am here 15");
 
 var lastselect = "";
 
@@ -387,8 +387,33 @@ var points = groups.map(function (p) {
 
 console.log(points);
 
-var circle = [{x: 100, y: 700, r:20},{x: 200, y: 600, r:20},{x: 300, y: 500, r:20},{x: 400, y: 400, r:20}];     //points.map(function (p) { return d3.packEnclose(p);});
+var circles = [{ x: d3.sum(points[0], function(d){
+						return d.x;})/ points[0].length,
+				y: d3.sum(points[0], function(d){
+						return d.y;})/ points[0].length, 
+				r:20
+			  },
+			  { x: d3.sum(points[1], function(d){
+						return d.x;})/ points[1].length,
+				y: d3.sum(points[1], function(d){
+						return d.y;})/ points[1].length, 
+				r:20
+			  },
+			  { x: d3.sum(points[2], function(d){
+						return d.x;})/ points[2].length,
+				y: d3.sum(points[2], function(d){
+						return d.y;})/ points[2].length, 
+				r:20
+			  },
+			  { x: d3.sum(points[3], function(d){
+						return d.x;})/ points[3].length,
+				y: d3.sum(points[3], function(d){
+						return d.y;})/ points[3].length, 
+				r:20
+			  }
+			 ];
   
+console.log(circles)
 
 var annotations = [
   {
@@ -398,12 +423,12 @@ var annotations = [
     },
     type: d3.annotationCalloutCircle,
     subject: {
-      radius: circle[0].r + 20,         // circle radius
+      radius: circles[0].r + 20,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
     color: ["red"],
-    x: circle[0].x,
-    y: circle[0].y,
+    x: circles[0].x,
+    y: circles[0].y,
     dy: 93,
     dx: 176
   },
@@ -415,12 +440,12 @@ var annotations = [
     },
     type: d3.annotationCalloutCircle,
     subject: {
-      radius: circle[1].r + 20,         // circle radius
+      radius: circles[1].r + 20,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
     color: ["red"],
-    x: circle[1].x,
-    y: circle[1].y,
+    x: circles[1].x,
+    y: circles[1].y,
     dy: 93,
     dx: 176
   },
@@ -431,12 +456,12 @@ var annotations = [
     },
     type: d3.annotationCalloutCircle,
     subject: {
-      radius: circle[2].r + 20,         // circle radius
+      radius: circles[2].r + 20,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
     color: ["red"],
-    x: circle[2].x,
-    y: circle[2].y,
+    x: circles[2].x,
+    y: circles[2].y,
     dy: 93,
     dx: 176
   },
@@ -447,12 +472,12 @@ var annotations = [
     },
     type: d3.annotationCalloutCircle,
     subject: {
-      radius: circle[3].r + 20,         // circle radius
+      radius: circles[3].r + 20,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
     color: ["red"],
-    x: circle[3].x,
-    y: circle[3].y,
+    x: circles[3].x,
+    y: circles[3].y,
     dy: 93,
     dx: 176
   }
