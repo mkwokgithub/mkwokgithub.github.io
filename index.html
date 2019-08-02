@@ -444,19 +444,18 @@ d3.select("svg")
 .on("mouseout", tipMouseout);
 
 
-var testdata = [{cx: 200, cy : 200,r: 30}];
+var testdata = [{height: 200, width : 200}];
 
 // test text box
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-.selectAll("circle")
+.selectAll("rect")
 .data(testdata)
-.enter().append("circle")
+.enter().append("rect")
 .attr("opacity",1)
-.attr("cx", function(d,i){return d.cx;})
-.attr("cy", function(d,i){return d.cy;})
-.attr("r",function(d,i){return d.r;})
+.attr("height", function(d,i){return d.height;})
+.attr("width", function(d,i){return d.width;})
 .style("fill", mygreen);
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
