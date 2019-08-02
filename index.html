@@ -65,7 +65,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 81");
+console.log("I am here 83");
 
 var lastselect = "";
 
@@ -80,8 +80,8 @@ var mycirclegreen = "green" //"#2CA02CFF";
 var mycircleblue = "blue"  //"#1F77B4FF";
 var mycircleyellow = "#FF7F0EFF";
 
-var data_diesel = ["Diesel"];
 var data_electricity = ["Electricity"];
+var data_diesel = ["Diesel"];
 var data_gasoline = ["Gasoline"];
 var data_allfueltype = ["Electricity","Diesel","Gasoline"];
 
@@ -244,7 +244,7 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 
-myfilterdata = mydata;
+myfilterdata = mydata.filter(function(d){return  data_electricity.indexOf(d.Fuel) != -1;});
 
 // annotation:
 
@@ -865,23 +865,22 @@ d3.select("svg")
 }
 
 function mynext(){
-	if (document.getElementById('alltypebutton').style.backgroundColor != "") {
-		update(data_electricity);
-	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+	if (document.getElementById('electricitybutton').style.backgroundColor != "") {
 		update(data_diesel);
 	} else if (document.getElementById('dieselbutton').style.backgroundColor != ""){
 		update(data_gasoline);
+	} else if {document.getElementById('gasolinebutton').style.backgroundColor != ""} {
+		update(data_allfueltype);
 	} else {}
-
 }
 
 function myprevious(){
-	if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
+	if (document.getElementById('alltypebutton').style.backgroundColor != "") {
+		update(data_gasoline);
+	} else if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
 		update(data_diesel);
 	} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
 		update(data_electricity);
-	} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
-		update(data_allfueltype);
 	} else {} 
 }
 
