@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 69");
+console.log("I am here 71");
 
 var lastselect = "";
 
@@ -620,7 +620,7 @@ d3.select("#selectButton").on("change", function(d) {
 	// recover the option that has been chosen
 	var selectedOption = d3.select(this).property("value");
 	// run the updateChart function with this selected option
-	update_w_option(myfilterdata, selectedOption);
+	update_w_option(selectedOption);
 }) 
 
 }
