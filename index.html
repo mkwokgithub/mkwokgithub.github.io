@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 57");
+console.log("I am here 59");
 
 var lastselect = "";
 
@@ -95,9 +95,9 @@ var buttonbackgroundcolor = '#93c2e9';
 var mygreen = "#00ff00";
 var myblue = "#0080ff";
 var myred = "#ff0000";
-var mycirclepurple = "#9467BDFF";
-var mycirclegreen = "#2CA02CFF";
-var mycircleblue = "#1F77B4FF";
+var mycirclepurple = "purple" //"#9467BDFF";
+var mycirclegreen = "green" //"#2CA02CFF";
+var mycircleblue = "blue"  //"#1F77B4FF";
 var mycircleyellow = "#FF7F0EFF";
 
 var data_diesel = ["Diesel"];
@@ -397,7 +397,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[0].length), 
 				r: (d3.max(points[0], function(d){
 						return d.x;}) - d3.min(points[0], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			  },
 			  { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
@@ -405,7 +405,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[1].length), 
 				r: (d3.max(points[1], function(d){
 						return d.x;}) - d3.min(points[1], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			  },
 			  { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
@@ -413,7 +413,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[2].length), 
 				r: (d3.max(points[2], function(d){
 						return d.x;}) - d3.min(points[2], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			  },
 			  { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
@@ -421,7 +421,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[3].length), 
 				r: (d3.max(points[3], function(d){
 						return d.x;}) - d3.min(points[3], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			  }
 			 ];
   
@@ -438,7 +438,7 @@ annotation_0 =   {
       radius: circles[0].r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["blue"],
+    color: [mycircleblue],
     x: circles[0].x,
     y: circles[0].y,
     dy: 93,
@@ -455,7 +455,7 @@ annotation_1 =   {
       radius: circles[1].r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["green"],
+    color: [mycirclegreen],
     x: circles[1].x,
     y: circles[1].y,
     dy: 93,
@@ -472,7 +472,7 @@ annotation_2 = {
       radius: circles[2].r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["purple"],
+    color: [mycirclepurple],
     x: circles[2].x,
     y: circles[2].y,
     dy: 93,
@@ -489,7 +489,7 @@ annotation_3 = {
       radius: circles[3].r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["yellow"],
+    color: [mycircleyellow],
     x: circles[3].x,
     y: circles[3].y,
     dy: 93,
@@ -708,7 +708,7 @@ circle_0 = { x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[0].length), 
 				r: (d3.max(points[0], function(d){
 						return d.x;}) - d3.min(points[0], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			};
 
 annotation_0 = {
@@ -721,7 +721,7 @@ annotation_0 = {
       radius: circle_0.r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["red"],
+    color: [mycircleblue],
     x: circle_0.x,
     y: circle_0.y,
     dy: 93,
@@ -741,7 +741,7 @@ circle_1 = { x: (d3.sum(points[1], function(d){
 						return d.y;})/ points[1].length), 
 				r: (d3.max(points[1], function(d){
 						return d.x;}) - d3.min(points[1], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			};
 
 annotation_1 = {
@@ -754,7 +754,7 @@ annotation_1 = {
       radius: circle_1.r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["red"],
+    color: [mycirclegreen],
     x: circle_1.x,
     y: circle_1.y,
     dy: 93,
@@ -771,7 +771,7 @@ circle_2 = { x: (d3.sum(points[2], function(d){
 						return d.y;})/ points[2].length), 
 				r: (d3.max(points[2], function(d){
 						return d.x;}) - d3.min(points[2], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			};
 
 annotation_2 = {
@@ -784,7 +784,7 @@ annotation_2 = {
       radius: circle_2.r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["red"],
+    color: ["mycirclepurple"],
     x: circle_2.x,
     y: circle_2.y,
     dy: 93,
@@ -801,7 +801,7 @@ circle_3 = { x: (d3.sum(points[3], function(d){
 						return d.y;})/ points[3].length), 
 				r: (d3.max(points[3], function(d){
 						return d.x;}) - d3.min(points[3], function(d){
-						return d.x;}))/2 + 20
+						return d.x;}))/2 + 40
 			};
 
 annotation_3 = {
@@ -814,7 +814,7 @@ annotation_3 = {
       radius: circle_3.r,         // circle radius
       radiusPadding: 10   // white space around circle befor connector
     },
-    color: ["red"],
+    color: [mycircleyellow],
     x: circle_3.x,
     y: circle_3.y,
     dy: 93,
