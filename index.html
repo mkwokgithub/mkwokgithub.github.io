@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 160");
+console.log("I am here 163");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -450,7 +450,7 @@ var testdata = [{height: 200, width : 200}];
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-//.selectAll("rect")
+.selectAll("rect")
 .data(testdata)
 .enter().append("rect")
 .attr("height", function(d,i){return d.height;})
