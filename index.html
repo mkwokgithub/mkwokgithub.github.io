@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 43");
+console.log("I am here 45");
 
 var lastselect = "";
 
@@ -692,6 +692,7 @@ var circle_0 = "";
 var circle_1 = "";
 var circle_2 = "";
 var circle_3 = "";
+var annotations = [];
 
 if (points[0].length > 0) {
 
@@ -722,6 +723,9 @@ annotation_0 = {
     dy: 93,
     dx: 176
   };
+  
+ annotations.concat(annotation_0); 
+  
 };
 
 if (points[1].length > 0) {
@@ -752,6 +756,7 @@ annotation_1 = {
     dy: 93,
     dx: 176
   };
+   annotations.concat(annotation_1); 
 };
 
 if (points[2].length > 0) {
@@ -776,16 +781,17 @@ annotation_2 = {
       radiusPadding: 10   // white space around circle befor connector
     },
     color: ["red"],
-    x: circle_0.x,
+    x: circle_2.x,
     y: circle_2.y,
     dy: 93,
     dx: 176
   };
+   annotations.concat(annotation_2); 
 };
 
 if (points[3].length > 0) {
 console.log("point 3 has data");
-circle_2 = { x: (d3.sum(points[3], function(d){
+circle_3 = { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
 						return d.y;})/ points[3].length), 
@@ -810,27 +816,12 @@ annotation_3 = {
     dy: 93,
     dx: 176
   };
+   annotations.concat(annotation_3); 
 };
 
-var annotations = [];
 
-if (annotation_0 != ""){
-annotations.concat(annotation_0);
-};
 
-if (annotation_1 != ""){
-annotations.concat(annotation_1);
-};
-
-if (annotation_2 != ""){
-annotations.concat(annotation_2);
-};
-
-if (annotation_3 != ""){
-annotations.concat(annotation_3);
-};
-
-console.log(annotations);
+console.log(annotations.length);
 
 
 var makeAnnotations = d3.annotation()
