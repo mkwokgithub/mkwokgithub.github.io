@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 21");
+console.log("I am here 23");
 
 var lastselect = "";
 
@@ -353,24 +353,24 @@ myfilterdata = mydata;
 //      .style("font-weight", "bold")
 //      .text("Fuel Efficiency for All Fuel Types");
 	  
-d3.select("svg")
-.append("g")
-.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-.selectAll("circle")
-//.data(mydata.filter(function(d){return  d.Fuel == "Electricity";}))
-.data(myfilterdata)
-.enter().append("circle")
-.attr("opacity",1)
-.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
-.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
-.style("fill", function(d) {            // <== Add these
-          if (d.Fuel == "Electricity") {return mygreen;}  
-          else if (d.Fuel == "Diesel"){ return myblue; }
-          else {return myred;}		  
-;}) 
-.on("mouseover", tipMouseover)
-.on("mouseout", tipMouseout);
+//d3.select("svg")
+//.append("g")
+//.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+//.selectAll("circle")
+////.data(mydata.filter(function(d){return  d.Fuel == "Electricity";}))
+//.data(myfilterdata)
+//.enter().append("circle")
+//.attr("opacity",1)
+//.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+//.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+//.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+//.style("fill", function(d) {            // <== Add these
+//          if (d.Fuel == "Electricity") {return mygreen;}  
+//         else if (d.Fuel == "Diesel"){ return myblue; }
+//          else {return myred;}		  
+//;}) 
+//.on("mouseover", tipMouseover)
+//.on("mouseout", tipMouseout);
 
 // annotation:
 
@@ -499,6 +499,28 @@ d3.select("svg")
   .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
   .attr("class", "annotation-encircle")
   .call(makeAnnotations)
+
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+//.data(mydata.filter(function(d){return  d.Fuel == "Electricity";}))
+.data(myfilterdata)
+.enter().append("circle")
+.attr("opacity",1)
+.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
+.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
+.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
+.style("fill", function(d) {            // <== Add these
+          if (d.Fuel == "Electricity") {return mygreen;}  
+          else if (d.Fuel == "Diesel"){ return myblue; }
+          else {return myred;}		  
+;}) 
+.on("mouseover", tipMouseover)
+.on("mouseout", tipMouseout);
+
+
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 myGroup = ["Select a Make"].concat(myGroup);
