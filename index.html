@@ -56,18 +56,16 @@ circle {stroke: black;}
 </div>
 
 <!-- Initialize a select button -->
-<!-- <select id="selectButton"></select> -->
+<select id="selectButton"></select>
 
 <!-- Create a div where the graph will take place -->
 
-<div id="my_dataviz">
-<select id="selectButton"></select>
-</div>
+<div id="my_dataviz"></div>
 <div id="my_title"></div>
 
 <script>
 
-console.log("I am here 97");
+console.log("I am here 99");
 
 var lastselect = "";
 
@@ -88,7 +86,7 @@ var data_gasoline = ["Gasoline"];
 var data_allfueltype = ["Electricity","Diesel","Gasoline"];
 
 var margin_top = {value: 70};
-var margin_left = {value: 100};
+var margin_left = {value: 50};
 var chart_width = {value:800};
 var chart_height = {value:600};
 var svg_width = {value:1100};
@@ -442,7 +440,6 @@ myGroup = ["Select a Make"].concat(myGroup);
 
 // add the options to the button
 d3.select("#selectButton")
-	.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
    .style("left", "350px")
    .style("top", "50px")
   .selectAll('myOptions')
