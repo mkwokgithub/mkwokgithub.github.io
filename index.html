@@ -380,12 +380,10 @@ var points = groups.map(function (p) {
     }).map(function (d) {
       return { x: d.x, y: d.y};
     });
-  });
-
-
-var circle = points.map(function (p) {
-return d3.packEnclose(p);
 });
+
+
+var circle = points.map(function (p) { return d3.packEnclose(p);});
   
 
 var annotations = [
