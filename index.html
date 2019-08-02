@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 41");
+console.log("I am here 43");
 
 var lastselect = "";
 
@@ -385,7 +385,7 @@ var points = groups.map(function (p) {
     });
 });
 
-console.log(points);
+// console.log(points);
 
 var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.x;})/ points[0].length),
@@ -421,7 +421,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 			  }
 			 ];
   
-console.log(circles)
+// console.log(circles)
 
 
 annotation_0 =   {
@@ -695,6 +695,8 @@ var circle_3 = "";
 
 if (points[0].length > 0) {
 
+console.log("point 0 has data");
+
 circle_0 = { x: (d3.sum(points[0], function(d){
 						return d.x;})/ points[0].length),
 				y: (d3.sum(points[0], function(d){
@@ -724,6 +726,7 @@ annotation_0 = {
 
 if (points[1].length > 0) {
 
+console.log("point 1 has data");
 circle_1 = { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
 				y: (d3.sum(points[1], function(d){
@@ -752,7 +755,7 @@ annotation_1 = {
 };
 
 if (points[2].length > 0) {
-
+console.log("point 2 has data");
 circle_2 = { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
 				y: (d3.sum(points[2], function(d){
@@ -781,7 +784,7 @@ annotation_2 = {
 };
 
 if (points[3].length > 0) {
-
+console.log("point 3 has data");
 circle_2 = { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
@@ -816,16 +819,18 @@ annotations.concat(annotation_0);
 };
 
 if (annotation_1 != ""){
-annotations.concat(annotation_0);
+annotations.concat(annotation_1);
 };
 
 if (annotation_2 != ""){
-annotations.concat(annotation_0);
+annotations.concat(annotation_2);
 };
 
 if (annotation_3 != ""){
-annotations.concat(annotation_0);
+annotations.concat(annotation_3);
 };
+
+console.log(annotations);
 
 
 var makeAnnotations = d3.annotation()
@@ -834,7 +839,7 @@ var makeAnnotations = d3.annotation()
 d3.select(".annotation-encircle")
     .call(makeAnnotations);
 	
-console.log(points);
+// console.log(points);
 
 
 d3.select("svg")
