@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 143");
+console.log("I am here 145");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -102,16 +102,6 @@ var svg = d3.select("#my_dataviz")
   .append("g")
     .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
-// test text box
-d3.select("svg")
-.append("g")
-.attr("transform","translate("+500+","+margin_top.value+")")
-.selectAll("circle")
-.enter().append("circle")
-.attr("cx", 200)
-.attr("cy", 200)
-.attr("r", 20)
-.style("fill", mygreen);
 //.attr("height", 200)
 //.attr("width", 100)
 //.append("text")
@@ -454,6 +444,16 @@ d3.select("svg")
 .on("mouseout", tipMouseout);
 
 
+// test text box
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.selectAll("circle")
+.enter().append("circle")
+.attr("cx", 200)
+.attr("cy", 200)
+.attr("r",30)
+.style("fill", mygreen);
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 myGroup = ["Select a Make"].concat(myGroup);
