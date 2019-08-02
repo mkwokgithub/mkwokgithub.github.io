@@ -446,14 +446,14 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 43");
+console.log(" testbox 47");
 
 // text box
 
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g')
 //.attr("transform","translate("+(margin_left.value+svg_width.value)+","+margin_top.value+")")
-.attr("transform","translate("+(chart_width.value + margin_left.value)+","+(margin_top.value+50)+")")
+.attr("transform","translate("+1100+","+(margin_top.value+50)+")")
 .attr('class', 'rect');
 
 myrect.append("rect")
@@ -461,7 +461,7 @@ myrect.append("rect")
                           .attr("width", 300)
                           .attr('fill','none')
                           .attr('stroke','#008080')
-                          //.attr('class','ourmission')
+                          .attr('class','ourmission')
 myrect.append('text')
                          // .attr('x', 65)
                          // .attr('y',65)
