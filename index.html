@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 135");
+console.log("I am here 137");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -102,20 +102,20 @@ var svg = d3.select("#my_dataviz")
   .append("g")
     .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
 
-// append the comment svg object to the body of the page
-//var svg_comment = d3.select("#my_commentviz")
-//  .append("svg")
- //   .attr("width", svg_comment_width.value)
-//    .attr("height", svg_comment_height.value)
- // .append("g")
- //   .attr("transform","translate("+(1300)+","+margin_top.value+")");
+// test text box
+d3.select("svg")
+.append("g")
+.attr("transform","translate("+1050+","+margin_top.value+")")
+.selectAll("rect")
+.enter().append("rect")
+.attr("opacity",1)
+.attr("height", 400)
+.attr("width", 300)
+.append("text")
+.style("font-weight", "bold")
+.attr("class","wrap")
+.text("test comment test comment test commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest comment")
 
-// Create Y axis label:
-svg.append("text")
-   .attr("class", "wrap")    
-  .attr("transform","translate("+1050+","+margin_top.value+")")
-  .style("font-weight", "bold")
-  .text("test comment test comment test commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest comment");
 
 
 // Initialise a X axis:
