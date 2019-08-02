@@ -446,17 +446,17 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 2");
+console.log(" testbox 3");
 // test text box
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-.append("text")
-.text("testing")
-.attr("dx", -20)
 .selectAll("rect")
 .data(testdata)
 .enter().append("rect")
+.append("text")
+.text("testing")
+.attr("dx", -20)
 .attr("height", function(d,i){return d.height;})
 .attr("width", function(d,i){return d.width;})
 .attr("opacity",1)
