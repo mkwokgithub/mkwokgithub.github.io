@@ -446,7 +446,7 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 5");
+console.log(" testbox 7");
 
 // text box
 var g = d3.select("svg")
@@ -458,10 +458,12 @@ var g = d3.select("svg")
 .attr("height", function(d,i){return d.height;})
 .attr("width", function(d,i){return d.width;});
 //.attr("opacity",1)
-//.style("fill", mygreen);
+.style("fill", none);
 
 g.append("text")
 .attr("dx", -20)
+.attr("x",margin_left.value+100)
+.attr("y",margin_top.value+50)
 .text("testing");
 
 
