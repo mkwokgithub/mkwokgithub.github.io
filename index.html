@@ -67,7 +67,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 93");
+console.log("I am here 95");
 
 var lastselect = "";
 
@@ -448,6 +448,7 @@ d3.select("#selectButton")
 	.data(myGroup)
   .enter()
 	.append('option')
+	.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
   .text(function (d) { return d; }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
