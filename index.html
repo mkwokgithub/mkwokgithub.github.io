@@ -546,6 +546,7 @@ d3.selectAll("#rect_id").remove();
 
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g')
+.attr("id","rect_id")
 //.attr("transform","translate("+(margin_left.value+svg_width.value)+","+margin_top.value+")")
 .attr("transform","translate("+1100+","+(margin_top.value+50)+")")
 .attr('class', 'rect');
