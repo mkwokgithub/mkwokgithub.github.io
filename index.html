@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 25");
+console.log("I am here 27");
 
 var lastselect = "";
 
@@ -497,7 +497,8 @@ var makeAnnotations = d3.annotation()
 d3.select("svg")
   .append("g")
   .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-  .attr("class", "annotation-encircle")
+ // .attr("class", "annotation-encircle")
+  .attr("annotation-encircle")
   .call(makeAnnotations)
 
 
