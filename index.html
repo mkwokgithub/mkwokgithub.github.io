@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 67");
+console.log("I am here 69");
 
 var lastselect = "";
 
@@ -910,6 +910,7 @@ if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
 	fueltype = data_allfueltype;
 } 
 
+console.log(fueltype);
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
