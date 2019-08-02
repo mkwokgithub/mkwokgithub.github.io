@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 49");
+console.log("I am here 51");
 
 var lastselect = "";
 
@@ -393,7 +393,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[0].length), 
 				r: (d3.max(points[0], function(d){
 						return d.x;}) - d3.min(points[0], function(d){
-						return d.x;}))/2
+						return d.x;}))/2 + 20
 			  },
 			  { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
@@ -401,7 +401,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[1].length), 
 				r: (d3.max(points[1], function(d){
 						return d.x;}) - d3.min(points[1], function(d){
-						return d.x;}))/2
+						return d.x;}))/2 + 20
 			  },
 			  { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
@@ -409,7 +409,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[2].length), 
 				r: (d3.max(points[2], function(d){
 						return d.x;}) - d3.min(points[2], function(d){
-						return d.x;}))/2
+						return d.x;}))/2 + 20
 			  },
 			  { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
@@ -417,7 +417,7 @@ var circles = [{ x: (d3.sum(points[0], function(d){
 						return d.y;})/ points[3].length), 
 				r: (d3.max(points[3], function(d){
 						return d.x;}) - d3.min(points[3], function(d){
-						return d.x;}))/2
+						return d.x;}))/2 + 20
 			  }
 			 ];
   
