@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 131");
+console.log("I am here 133");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -111,7 +111,8 @@ var svg = d3.select("#my_dataviz")
  //   .attr("transform","translate("+(1300)+","+margin_top.value+")");
 
 // Create Y axis label:
-svg.append("text" class="wrap")    
+svg.append("text")
+   .attr("class", "wrap")    
   .attr("transform","translate("+1050+","+margin_top.value+")")
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
