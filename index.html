@@ -65,7 +65,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 87");
+console.log("I am here 89");
 
 var lastselect = "";
 
@@ -152,7 +152,7 @@ svg.append("text")
 svg.append("text")
       .attr("transform",
             "translate(" + (margin_left.value + 300) + " ," +
-                           margin_top.value + ")")
+                           (margin_top.value - 50) + ")")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
       .text("Vehicle Fuel Efficiency for Fuel Type of Electricity, Diesel, and Gasoline");
