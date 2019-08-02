@@ -94,6 +94,11 @@ var svg_height = {value:900};
 var svg_comment_width = {value:400};
 var svg_comment_height = {value:900};
 
+var scene_1_electricity = "Electrity: very good milage";
+var scene_2_disel = "Diesel: good milage";
+var scene_3_gasoline = "Gasoline: More cylinders, less efficient"
+var scene_4_alltype = "A trend: efficiency depend on cylinders."
+
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
@@ -469,25 +474,8 @@ myrect.append('text')
 						  .attr('dy', 20)
 						  //.attr('class','wrap')
 						   .attr("text-anchor", "left")
-                          .text('Thishis is the textthis is the textthis is the textthis is the textthis is the textthis is the textthis is the textthis is the text')
-						  .call(wrap(300));
-
-//var g = d3.select("svg")
-//.append("g")
-//.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-//.selectAll("rect")
-//.data(testdata)
-//.enter().append("rect")
-//.attr("height", function(d,i){return d.height;})
-//.attr("width", function(d,i){return d.width;})
-////.attr("opacity",1)
-//.style("fill", "none");
-
-//g.append("text")
-//.attr("dx", -20)
-//.attr("x",margin_left.value+100)
-//.attr("y",margin_top.value+50)
-//.text("testing");
+                          .text(scene_1_electricity);
+					//	  .call(wrap(300));
 
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
@@ -520,6 +508,8 @@ d3.select("#selectButton").on("change", function(d) {
 
 async function update(fuel) {
 
+var mytext;
+
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
 document.getElementById('dieselbutton').style.backgroundColor='';
@@ -527,12 +517,16 @@ document.getElementById('gasolinebutton').style.backgroundColor='';
 
 if (fuel == "Electricity") {
 document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
+mytext = scene_1_electricity;
 } else if (fuel == "Diesel") {
 document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
+mytext = scene_2_disel;
 } else if (fuel == "Gasoline") {
 document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
+mytext = scene_3_gasoline;
 } else {
 document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
+mytext = scene_4_alltype;
 }
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
@@ -546,6 +540,32 @@ let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function
 
 d3.selectAll("circle").remove();
 d3.selectAll("option").remove();
+d3.selectAll("rect").remove();
+
+
+var svgContainer = d3.select("svg");
+var myrect = svgContainer.append('g')
+//.attr("transform","translate("+(margin_left.value+svg_width.value)+","+margin_top.value+")")
+.attr("transform","translate("+1100+","+(margin_top.value+50)+")")
+.attr('class', 'rect');
+
+myrect.append("rect")
+                          .attr("height", chart_height.value)
+                          .attr("width", 300)
+                          .attr('fill','none')
+                          .attr('stroke','#008080')
+                          .attr('class','ourmission')
+myrect.append('text')
+                         // .attr('x', 65)
+                         // .attr('y',65)
+                          .attr('dx', 10)
+						  .attr('dy', 20)
+						  //.attr('class','wrap')
+						   .attr("text-anchor", "left")
+                          .text(mytext);
+					//	  .call(wrap(300));
+
+
 
 myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
 
