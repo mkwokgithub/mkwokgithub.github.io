@@ -65,7 +65,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 85");
+console.log("I am here 87");
 
 var lastselect = "";
 
@@ -231,7 +231,7 @@ var gp_8_10_12 = [8,10,12];
 
 async function init() {
 
-document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
+document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
  data.forEach(function(d) {
@@ -261,114 +261,152 @@ var points = groups.map(function (p) {
 
 
 
-var circles = [{ x: (d3.sum(points[0], function(d){
+var annotation_0 = "";
+var annotation_1 = "";
+var annotation_2 = "";
+var annotation_3 = "";
+var circle_0 = "";
+var circle_1 = "";
+var circle_2 = "";
+var circle_3 = "";
+var annotations = [];
+
+if (points[0].length > 0) {
+
+
+circle_0 = { x: (d3.sum(points[0], function(d){
 						return d.x;})/ points[0].length),
 				y: (d3.sum(points[0], function(d){
 						return d.y;})/ points[0].length), 
 				r: (d3.max(points[0], function(d){
 						return d.x;}) - d3.min(points[0], function(d){
 						return d.x;}))/2 + 40
-			  },
-			  { x: (d3.sum(points[1], function(d){
+			};
+
+annotation_0 = {
+    note: {
+      label: "0 Cylinder",
+      title: "Cylinders",
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_0.r,         
+      radiusPadding: 5   
+    },
+    color: [mycircleblue],
+    x: circle_0.x,
+    y: circle_0.y,
+    dy: 93,
+    dx: -176
+  };
+  
+   annotations = [annotation_0].concat(annotations); 
+  
+};
+
+if (points[1].length > 0) {
+
+
+circle_1 = { x: (d3.sum(points[1], function(d){
 						return d.x;})/ points[1].length),
 				y: (d3.sum(points[1], function(d){
 						return d.y;})/ points[1].length), 
 				r: (d3.max(points[1], function(d){
 						return d.x;}) - d3.min(points[1], function(d){
 						return d.x;}))/2 + 40
-			  },
-			  { x: (d3.sum(points[2], function(d){
+			};
+
+annotation_1 = {
+    note: {
+      label: "2,3,or 4 Cylinders",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_1.r,         
+      radiusPadding: 5   // white space around circle befor connector
+    },
+    color: [mycirclegreen],
+    x: circle_1.x,
+    y: circle_1.y,
+    dy: 93,
+    dx: 176
+  };
+   annotations = [annotation_1].concat(annotations); 
+};
+
+if (points[2].length > 0) {
+
+circle_2 = { x: (d3.sum(points[2], function(d){
 						return d.x;})/ points[2].length),
 				y: (d3.sum(points[2], function(d){
 						return d.y;})/ points[2].length), 
 				r: (d3.max(points[2], function(d){
 						return d.x;}) - d3.min(points[2], function(d){
 						return d.x;}))/2 + 40
-			  },
-			  { x: (d3.sum(points[3], function(d){
+			};
+
+annotation_2 = {
+    note: {
+      label: "6 Cylinder",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle_2.r,         // circle radius
+      radiusPadding: 5   // white space around circle befor connector
+    },
+    color: [mycirclepurple],
+    x: circle_2.x,
+    y: circle_2.y,
+    dy: 93,
+    dx: 176
+  };
+   annotations = [annotation_2].concat(annotations); 
+};
+
+if (points[3].length > 0) {
+
+circle_3 = { x: (d3.sum(points[3], function(d){
 						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
 						return d.y;})/ points[3].length), 
 				r: (d3.max(points[3], function(d){
 						return d.x;}) - d3.min(points[3], function(d){
 						return d.x;}))/2 + 40
-			  }
-			 ];
-  
-
-
-annotation_0 =   {
-    note: {
-      label: "0 Cylinder",
-      title: "Cylinders"
-    },
-    type: d3.annotationCalloutCircle,
-    subject: {
-      radius: circles[0].r,         // circle radius
-      radiusPadding: 5   // white space around circle befor connector
-    },
-    color: [mycircleblue],
-    x: circles[0].x,
-    y: circles[0].y,
-    dy: 93,
-    dx: -176
-  };
-  
-annotation_1 =   {
-    note: {
-      label: "2,3,or 4 Cylinders ",
-      title: "Cylinders"
-    },
-    type: d3.annotationCalloutCircle,
-    subject: {
-      radius: circles[1].r,         // circle radius
-      radiusPadding: 5   // white space around circle befor connector
-    },
-    color: [mycirclegreen],
-    x: circles[1].x,
-    y: circles[1].y,
-    dy: 93,
-    dx: 176
-  };
-
-annotation_2 = {
-    note: {
-      label: "6 Cylinders",
-      title: "Cylinders"
-    },
-    type: d3.annotationCalloutCircle,
-    subject: {
-      radius: circles[2].r,         // circle radius
-      radiusPadding: 5   // white space around circle befor connector
-    },
-    color: [mycirclepurple],
-    x: circles[2].x,
-    y: circles[2].y,
-    dy: 93,
-    dx: 176
-  };
+			};
 
 annotation_3 = {
     note: {
-      label: "8 Cylinders or above",
+      label: "8,10,or 12 Cylinders",
       title: "Cylinders"
     },
     type: d3.annotationCalloutCircle,
     subject: {
-      radius: circles[3].r,         // circle radius
+      radius: circle_3.r,         // circle radius
       radiusPadding: 5   // white space around circle befor connector
     },
     color: [mycircleyellow],
-    x: circles[3].x,
-    y: circles[3].y,
+    x: circle_3.x,
+    y: circle_3.y,
     dy: 93,
     dx: 176
   };
+   annotations = [annotation_3].concat(annotations); 
+};
 
-var annotations = [annotation_0,annotation_1,annotation_2,annotation_3];  
-  
+
+
+
+
 var makeAnnotations = d3.annotation()
   .annotations(annotations);
+
+d3.select(".annotation-encircle")
+    .call(makeAnnotations);
+	
+
+
   
 d3.select("svg")
   .append("g")
