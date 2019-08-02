@@ -66,9 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 109");
-
-var lastselect = "";
+console.log("I am here 111");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -113,7 +111,7 @@ var svg_comment = d3.select("#my_commentviz")
     .attr("transform","translate("+(margin_left.value+svg_width.value)+","+margin_top.value+")");
 
 // Create Y axis label:
-svg_comment.append("text")
+svg.append("text")
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
   .text("test comment");
