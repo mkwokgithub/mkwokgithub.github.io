@@ -234,27 +234,89 @@ data_allfueltype.forEach((value, index) => {
 
 // Annotation
 
-const annotations = [
-  {
-    note: {
-      label: "Here is the annotation label",
-      title: "Annotation title"
-    },
-    type: d3.annotationCalloutCircle,
-    subject: {
-      radius: 20,         // circle radius
-      radiusPadding: 20   // white space around circle befor connector
-    },
-    color: ["red"],
-    x: 40,
-    y: 160,
-    dy: 70,
-    dx: 70
-  }
-]
+var groups = ["gp-0", "gp-2-3-4", "gp-6", "gp-8-10-12"];
+var gp_0 = [0];
+var gp_2_3_4 = [2,3,4];
+var gp_6 = [6];
+var gp_8_10_12 = [8,10,12];
 
-const makeAnnotations = d3.annotation()
-  .annotations(annotations)
+//var circle = datapoints.map(function (p) {
+//return d3.packEnclose(p);
+//});
+
+//var annotations = [
+//  {
+//    note: {
+//      label: "0 Cylinder",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[0].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[0].x,
+//    y: circle[0].y,
+//    dy: 93,
+//    dx: 176
+ // },
+    
+ // {
+//    note: {
+//      label: "2,3,or 4 Cylinders ",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[1].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[1].x,
+ //   y: circle[1].y,
+//    dy: 93,
+//    dx: 176
+//  },
+//    {
+ //   note: {
+//      label: "6 Cylinders",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[2].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//   color: ["red"],
+//    x: circle[2].x,
+//    y: circle[2].y,
+//    dy: 93,
+//    dx: 176
+//  },
+//  {
+//    note: {
+ //     label: "8 Cylinders or above",
+//      title: "Cylinders"
+//    },
+//    type: d3.annotationCalloutCircle,
+//    subject: {
+//      radius: circle[3].r + 20,         // circle radius
+//      radiusPadding: 10   // white space around circle befor connector
+//    },
+//    color: ["red"],
+//    x: circle[3].x,
+//    y: circle[3].y,
+//    dy: 93,
+ //   dx: 176
+//  }
+  
+//]
+
+//const makeAnnotations = d3.annotation()
+//  .annotations(annotations)
+ // .accessors({ x: d => d.x , y: d => d.y});
+
 
 
 
@@ -307,9 +369,99 @@ d3.select("svg")
 .on("mouseover", tipMouseover)
 .on("mouseout", tipMouseout);
 
+// annotation:
 
+var points = groups.map(function (p) {
+    return  myfilterdata.filter(function (d) {
+		if ( p == "gp-0") {return gp_0.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-2-3-4") {return gp_2_3_4.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-6") {return gp_6.indexOf(d.EngineCylinders) != -1;}
+		else if (p == "gp-8-10-12") {return gp_8_10_12.indexOf(d.EngineCylinders) != -1;}
+    }).map(function (d) {
+      return { x: d.x, y: d.y};
+    });
+  });
+
+
+var circle = points.map(function (p) {
+return d3.packEnclose(p);
+});
+  
+
+var annotations = [
+  {
+    note: {
+      label: "0 Cylinder",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle[0].r + 20,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle[0].x,
+    y: circle[0].y,
+    dy: 93,
+    dx: 176
+  },
+    
+  {
+    note: {
+      label: "2,3,or 4 Cylinders ",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle[1].r + 20,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle[1].x,
+    y: circle[1].y,
+    dy: 93,
+    dx: 176
+  },
+    {
+    note: {
+      label: "6 Cylinders",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle[2].r + 20,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle[2].x,
+    y: circle[2].y,
+    dy: 93,
+    dx: 176
+  },
+  {
+    note: {
+      label: "8 Cylinders or above",
+      title: "Cylinders"
+    },
+    type: d3.annotationCalloutCircle,
+    subject: {
+      radius: circle[3].r + 20,         // circle radius
+      radiusPadding: 10   // white space around circle befor connector
+    },
+    color: ["red"],
+    x: circle[3].x,
+    y: circle[3].y,
+    dy: 93,
+    dx: 176
+  }
+]
+var makeAnnotations = d3.annotation()
+  .annotations(annotations);
+//  .accessors({ x: d => d.x , y: d => d.y});
+  
 d3.select("svg")
   .append("g")
+  .attr("class", "annotation-encircle")
   .call(makeAnnotations)
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
