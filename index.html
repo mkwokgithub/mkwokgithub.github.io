@@ -96,8 +96,8 @@ var svg_comment_height = {value:900};
 
 var scene_1_electricity = "Electrity: very good milage";
 var scene_2_disel = "Diesel: good milage";
-var scene_3_gasoline = "Gasoline: More cylinders, less efficient"
-var scene_4_alltype = "A trend: efficiency depend on cylinders."
+var scene_3_gasoline = "Gasoline: More cylinders, less efficient";
+var scene_4_alltype = "A trend: efficiency depend on cylinders";
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -473,7 +473,7 @@ myrect.append('text')
                           .attr('dx', 10)
 						  .attr('dy', 20)
 						  //.attr('class','wrap')
-						   .attr("text-anchor", "left")
+						  // .attr("text-anchor", "left")
                           .text(scene_1_electricity);
 					//	  .call(wrap(300));
 
@@ -508,7 +508,7 @@ d3.select("#selectButton").on("change", function(d) {
 
 async function update(fuel) {
 
-var mytext;
+var mytext = "";
 
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
@@ -561,7 +561,7 @@ myrect.append('text')
                           .attr('dx', 10)
 						  .attr('dy', 20)
 						  //.attr('class','wrap')
-						   .attr("text-anchor", "left")
+						  // .attr("text-anchor", "left")
                           .text(mytext);
 					//	  .call(wrap(300));
 
