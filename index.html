@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 65");
+console.log("I am here 67");
 
 var lastselect = "";
 
@@ -890,19 +890,43 @@ d3.select("#selectButton").on("change", function(d) {
 }
 
 
-function update_w_option(data,option) {
-
-console.log("update_w_option");
+async function update_w_option(data,option) {
 
 d3.selectAll("circle").remove();
 
-if (option == "Select a Make") {
-	mydata = data;
-} else {
-	mydata = data.filter(function(d){return  option.indexOf(d.Make) != -1;});
-}
+var fueltype;
 
-myfilterdata = mydata;
+
+if (document.getElementById('gasolinebutton').style.backgroundColor != "") {
+	fueltype = data_gasoline;
+} else if (document.getElementById('dieselbutton').style.backgroundColor != "") {
+	fueltype = data_diesel;
+} else if (document.getElementById('electricitybutton').style.backgroundColor != "") {
+	fueltype = data_electricity;
+} else {
+	fueltype = data_allfueltype;
+} 
+
+
+let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
+ data.forEach(function(d) {
+    d.AverageCityMPG = +d.AverageCityMPG;
+    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+    d.EngineCylinders = +d.EngineCylinders;
+ });
+ return data;
+});
+
+
+var myfueldata = mydata.filter(function(d){return  fueltype.indexOf(d.Fuel) != -1;});
+
+
+
+if (option == "Select a Make") {
+	myfilterdata = myfueldata;
+} else {
+	myfilterdata = myfueldata.filter(function(d){return  option.indexOf(d.Make) != -1;});
+}
 
 var points = groups.map(function (p) {
     return  myfilterdata.filter(function (d) {
