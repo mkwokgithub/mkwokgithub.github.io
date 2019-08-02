@@ -446,12 +446,15 @@ d3.select("svg")
 
 var testdata = [{height: 200, width : 200}];
 
-console.log(" testbox 21");
+console.log(" testbox 23");
 
 // text box
 
 var svgContainer = d3.select("svg");
-var myrect = svgContainer.append('g').attr('class', 'rect');
+var myrect = svgContainer.append('g')
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
+.attr('class', 'rect');
+
 myrect.append("rect")
                           .attr("height", 200)
                           .attr("width", 200)
