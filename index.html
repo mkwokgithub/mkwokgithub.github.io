@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 147");
+console.log("I am here 149");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -444,16 +444,19 @@ d3.select("svg")
 .on("mouseout", tipMouseout);
 
 
+var testdata = [{cx: 200, cy = 200,r: 30}];
+
 // test text box
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
 .selectAll("circle")
+.data(testdata)
 .enter().append("circle")
 .attr("opacity",1)
-.attr("cx", 200)
-.attr("cy", 200)
-.attr("r",30)
+.attr("cx", function(d,i){return d.cx;})
+.attr("cy", function(d,i){return d.cy;})
+.attr("r",function(d,i){return d.r;})
 .style("fill", mygreen);
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
