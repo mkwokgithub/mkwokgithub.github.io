@@ -61,11 +61,12 @@ circle {stroke: black;}
 <!-- Create a div where the graph will take place -->
 
 <div id="my_dataviz"></div>
+<div id="my_commentviz"></div
 <div id="my_title"></div>
 
 <script>
 
-console.log("I am here 101");
+console.log("I am here 103");
 
 var lastselect = "";
 
@@ -92,6 +93,9 @@ var chart_height = {value:600};
 var svg_width = {value:1100};
 var svg_height = {value:900};
 
+var svg_comment_width = {value:400};
+var svg_comment_height = {value:900};
+
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
@@ -99,6 +103,21 @@ var svg = d3.select("#my_dataviz")
     .attr("height", svg_height.value)
   .append("g")
     .attr("transform","translate("+margin_left.value+","+margin_top.value+")");
+
+// append the comment svg object to the body of the page
+var svg_comment = d3.select("#my_commentvizviz")
+  .append("svg")
+    .attr("width", svg_comment_width.value)
+    .attr("height", svg_comment_height.value)
+  .append("g")
+    .attr("transform","translate("+(margin_left.value+svg_width)+","+margin_top.value+")");
+
+// Create Y axis label:
+svg_comment.append("text")
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .text("test comment");
+
 
 // Initialise a X axis:
 var xScale = d3.scaleLog().domain([10,150]).range([0,chart_width.value]);
