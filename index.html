@@ -453,16 +453,16 @@ console.log(" testbox 21");
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g').attr('class', 'rect');
 myrect.append("rect")
-                          .attr("height", 65)
-                          .attr("width", 65)
+                          .attr("height", 200)
+                          .attr("width", 200)
                          // .attr("r", 65)
-                          .attr('fill','none')
+                          .attr('fill','white')
                           .attr('stroke','#008080')
                           .attr('class','ourmission')
 myrect.append('text')
                          // .attr('x', 65)
                          // .attr('y',65)
-                          .attr('dx',65)
+                          .attr('dx',-5)
                           .text('this is the text');
 
 //var g = d3.select("svg")
