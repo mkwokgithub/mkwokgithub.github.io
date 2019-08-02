@@ -86,7 +86,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 5");
+console.log("I am here 7");
 
 var lastselect = "";
 
@@ -386,7 +386,7 @@ var points = groups.map(function (p) {
 });
 
 
-var circle = points.map(function (p) { return d3.packEnclose(p);});
+var circle = [{x: 100, y: 700, r:20},{x: 200, y: 600, r:20},{x: 300, y: 500, r:20},{x: 400, y: 400, r:20}];     //points.map(function (p) { return d3.packEnclose(p);});
   
 
 var annotations = [
