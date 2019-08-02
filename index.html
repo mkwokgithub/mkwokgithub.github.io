@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 141");
+console.log("I am here 143");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -118,18 +118,6 @@ d3.select("svg")
 //.attr("class","wrap")
 //.text("test comment test comment test commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest commenttest comment")
 
-
-
-d3.select("svg")
-.append("g")
-.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
-.selectAll("circle")
-.data(myfilterdata)
-.enter().append("circle")
-.attr("opacity",1)
-.attr("cx",function(d,i){return xScale(d.AverageCityMPG);})
-.attr("cy",function(d,i){return yScale(d.AverageHighwayMPG);})
-.attr("r",function(d,i){return d.EngineCylinders**1.5 + 8;})
 
 
 // Initialise a X axis:
