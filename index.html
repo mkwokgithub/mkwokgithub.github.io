@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 107");
+console.log("I am here 109");
 
 var lastselect = "";
 
@@ -110,7 +110,7 @@ var svg_comment = d3.select("#my_commentviz")
     .attr("width", svg_comment_width.value)
     .attr("height", svg_comment_height.value)
   .append("g")
-    .attr("transform","translate("+(margin_left.value+svg_width)+","+margin_top.value+")");
+    .attr("transform","translate("+(margin_left.value+svg_width.value)+","+margin_top.value+")");
 
 // Create Y axis label:
 svg_comment.append("text")
