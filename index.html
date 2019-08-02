@@ -449,7 +449,7 @@ var testdata = [{height: 200, width : 200}];
 // test text box
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+(margin_left.value+200)+","+(margin_top.value+100)+")")
+.attr("transform","translate("+(margin_left.value+100)+","+(margin_top.value+50)+")")
 //.selectAll("rect")
 .data(testdata)
 .enter().append("rect")
@@ -457,9 +457,9 @@ d3.select("svg")
 .attr("width", function(d,i){return d.width;})
 .attr("opacity",1)
 .style("fill", mygreen)
-.append("text")
+//.append("text")
 //.attr("dx", function(d){return -20})
-.text("testing")
+//.text("testing")
 
 
 
