@@ -381,34 +381,34 @@ var points = groups.map(function (p) {
 		else if (p == "gp-6") {return gp_6.indexOf(d.EngineCylinders) != -1;}
 		else if (p == "gp-8-10-12") {return gp_8_10_12.indexOf(d.EngineCylinders) != -1;}
     }).map(function (d) {
-      return { x: xScale(d.AverageCityMPG), y: yScale(d.AverageHighwayMPG)};
+      return { x: xScale(d.AverageCityMPG) + margin_left.value+100, y: yScale(d.AverageHighwayMPG) + margin_top.value+50};
     });
 });
 
 console.log(points);
 
 var circles = [{ x: (d3.sum(points[0], function(d){
-						return d.x;})/ points[0].length) + margin_top.value+50,
+						return d.x;})/ points[0].length),
 				y: (d3.sum(points[0], function(d){
-						return d.y;})/ points[0].length) + margin_left.value+100, 
+						return d.y;})/ points[0].length), 
 				r:20
 			  },
 			  { x: (d3.sum(points[1], function(d){
-						return d.x;})/ points[1].length)  + margin_top.value+50,
+						return d.x;})/ points[1].length),
 				y: (d3.sum(points[1], function(d){
-						return d.y;})/ points[1].length) + margin_left.value+100, 
+						return d.y;})/ points[1].length), 
 				r:20
 			  },
 			  { x: (d3.sum(points[2], function(d){
-						return d.x;})/ points[2].length)  + margin_top.value+50,
+						return d.x;})/ points[2].length),
 				y: (d3.sum(points[2], function(d){
-						return d.y;})/ points[2].length) + margin_left.value+100, 
+						return d.y;})/ points[2].length), 
 				r:20
 			  },
 			  { x: (d3.sum(points[3], function(d){
-						return d.x;})/ points[3].length)  + margin_top.value+50,
+						return d.x;})/ points[3].length),
 				y: (d3.sum(points[3], function(d){
-						return d.y;})/ points[3].length) + margin_left.value+100, 
+						return d.y;})/ points[3].length), 
 				r:20
 			  }
 			 ];
