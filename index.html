@@ -66,7 +66,7 @@ circle {stroke: black;}
 
 <script>
 
-console.log("I am here 153");
+console.log("I am here 155");
 
 var buttonbackgroundcolor = '#93c2e9';
 
@@ -456,7 +456,10 @@ d3.select("svg")
 .attr("opacity",1)
 .attr("height", function(d,i){return d.height;})
 .attr("width", function(d,i){return d.width;})
-.style("fill", mygreen);
+.style("fill", mygreen)
+.append("text")
+.attr("dx", function(d){return -20})
+.text("testing");
 
 var myGroup = d3.map(myfilterdata, function(d){return(d.Make)}).keys()
 myGroup = ["Select a Make"].concat(myGroup);
