@@ -454,7 +454,7 @@ myrect.append("rect")
 .attr("height", chart_height.value)
 .attr("width", 300)
 .attr('fill','none')
-.attr('stroke','#008080')
+//.attr('stroke','#008080')
 .attr('class','ourmission')
 
 myrect.append('text')
@@ -494,6 +494,7 @@ d3.select("#selectButton").on("change", function(d) {
 async function update(fuel) {
 
 var mytext = "";
+var textbox_width =0;
 
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
@@ -503,15 +504,19 @@ document.getElementById('gasolinebutton').style.backgroundColor='';
 if (fuel == "Electricity") {
 document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_1_electricity;
+textbox_width = 300;
 } else if (fuel == "Diesel") {
 document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_2_disel;
+textbox_width = 300;
 } else if (fuel == "Gasoline") {
 document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_3_gasoline;
+textbox_width = 400;
 } else {
 document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_4_alltype;
+textbox_width = 400;
 }
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
@@ -531,14 +536,14 @@ d3.selectAll("#rect_id").remove();
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g')
 .attr("id","rect_id")
-.attr("transform","translate("+1100+","+(margin_top.value+50)+")")
+.attr("transform","translate("+1000+","+(margin_top.value+50)+")")
 .attr('class', 'rect');
 
 myrect.append("rect")
 .attr("height", chart_height.value)
-.attr("width", 300)
+.attr("width", textbox_width)
 .attr('fill','none')
-.attr('stroke','#008080')
+//.attr('stroke','#008080')
 .attr('class','ourmission')
 
 myrect.append('text')
