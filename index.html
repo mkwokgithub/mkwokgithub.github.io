@@ -495,6 +495,7 @@ async function update(fuel) {
 
 var mytext = "";
 var textbox_width =0;
+var right_shift = 0;
 
 document.getElementById('alltypebutton').style.backgroundColor='';
 document.getElementById('electricitybutton').style.backgroundColor='';
@@ -536,7 +537,7 @@ d3.selectAll("#rect_id").remove();
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g')
 .attr("id","rect_id")
-.attr("transform","translate("+1100+","+(margin_top.value+50)+")")
+.attr("transform","translate("+1050+","+(margin_top.value+50)+")")
 .attr('class', 'rect');
 
 myrect.append("rect")
