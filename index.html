@@ -494,6 +494,7 @@ d3.select("#selectButton").on("change", function(d) {
 async function update(fuel) {
 
 var mytext = "";
+var scene_text = "";
 var textbox_width =0;
 var right_shift = 0;
 
@@ -506,18 +507,22 @@ if (fuel == "Electricity") {
 document.getElementById('electricitybutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_1_electricity;
 textbox_width = 300;
+scene_text = "Scene 1:"
 } else if (fuel == "Diesel") {
 document.getElementById('dieselbutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_2_disel;
 textbox_width = 300;
+scene_text = "Scene 2:"
 } else if (fuel == "Gasoline") {
 document.getElementById('gasolinebutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_3_gasoline;
 textbox_width = 400;
+scene_text = "Scene 3:"
 } else {
 document.getElementById('alltypebutton').style.backgroundColor=buttonbackgroundcolor;
 mytext = scene_4_alltype;
 textbox_width = 400;
+scene_text = "Scene 4:"
 }
 
 let mydata = await d3.csv("https://flunky.github.io/cars2017.csv").then(function(data) {
@@ -551,12 +556,13 @@ myrect.append("rect")
 myrect.append('text')
 .attr('dx', 10)
 .attr('dy', 20)
-.text(mytext);
+.text(scene_text);
 
 myrect.append('text')
 .attr('dx', 10)
-.attr('dy', 40)
-.text("Scene:");
+.attr('dy', 50)
+.text(scene_text);
+.text(mytext);
 
 myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
 
