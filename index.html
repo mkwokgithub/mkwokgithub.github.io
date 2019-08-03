@@ -533,6 +533,7 @@ d3.selectAll("circle").remove();
 d3.selectAll("option").remove();
 d3.selectAll("#rect_id").remove();
 
+// text box
 
 var svgContainer = d3.select("svg");
 var myrect = svgContainer.append('g')
@@ -551,6 +552,11 @@ myrect.append('text')
 .attr('dx', 10)
 .attr('dy', 20)
 .text(mytext);
+
+myrect.append('text')
+.attr('dx', 10)
+.attr('dy', 40)
+.text("Scene:");
 
 myfilterdata = mydata.filter(function(d){return  fuel.indexOf(d.Fuel) != -1;})
 
